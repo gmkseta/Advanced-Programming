@@ -4,4 +4,6 @@
 void main()
 {
 	printf("Hd");
+	//¾Æ¹ºµ¥
+
 }
