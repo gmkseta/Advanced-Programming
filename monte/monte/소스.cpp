@@ -14,7 +14,7 @@ void main()
 
 	int num_pts_circle = 0;
 
-	const int num_pts_square = 1000;
+	const int num_pts_square = 10000;
 
 	for (int i = 0; i < num_pts_square; i++) {
 
@@ -26,6 +26,10 @@ void main()
 		{
 			num_pts_circle++;
 			fprintf(of, "%f, %f\n", x, y);
+		}
+		else
+		{
+			fprintf(of, ",,%f, %f\n", x, y);
 		}
 
 	}
