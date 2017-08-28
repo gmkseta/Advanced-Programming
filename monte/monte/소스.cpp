@@ -25,7 +25,7 @@ void main()
 double getRandomNumber(const double min, const double max) {
 	//temp >= 0.0&&temp<=1.0
 
-	double temp = (double)rand() / (double)RAND_MAX;
+	double temp = (double)rand() / (double)RAND_MAX;//
 
 
 	temp = min + (max - min)*temp;
