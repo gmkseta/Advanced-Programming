@@ -20,8 +20,37 @@ public:
 
 };
 
+//상속
+class Object
+{
+public:
+	void draw() {}
+	void rotate() {}
+	void del() {}
+	void move() {}
+};
+
+
+class Circle : public Object
+{
+public:
+};
+class Square : public Object
+{
+public:
+};
+class Line : public Object
+{
+};
+
 int main(void)
 {
+	Line line;
+	line.move();
+	line.del();
+	
+
+
 	//Myclass my_class;
 	Myclass my_class2(123);//defalut constructor 만들어줘 근데 위에처럼
 	//값을 넣어주는거로 하나만들어주면 defalut constructor가 사라짐
