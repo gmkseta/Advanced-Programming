@@ -2,14 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="DigitalCanvas2D.cpp" />
-    <ClCompile Include="gObject.cpp" />
+    <ClCompile Include="Bitmap.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DigitalCanvas2D.h" />
-    <ClInclude Include="RGBColors.h" />
-    <ClInclude Include="Tank.h" />
-    <ClInclude Include="gObject.h" />
     <ClInclude Include="Bitmap.h" />
   </ItemGroup>
 </Project>

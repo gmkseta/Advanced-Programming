@@ -1,19 +1,24 @@
 #include "DigitalCanvas2D.h"
 #include "RGBColors.h"
 #include <iostream>
-#include "iron.h"
 #include <vector>
-//#include "Tank.h"
+#include "gObject.h"
+#include "Bitmap.h"
+
 using namespace std;
 using namespace glm;
 
 DigitalCanvas2D my_canvas("This is my digital canvas!", 1024, 768); // Canvas : (-1.0, -1.0) x (1.0, 1.0)
 
+
 int main(void)
 {
+	char* hi = "lena.bmp";
+	Bitmap temp(hi);
 	float time = 0.0;
-	
-		//MyTank tank{ my_canvas ,init,init};
+	GameObject c;
+	c.init_image(&temp);
+	//MyTank tank{ my_canvas ,init,init};
 
 //	std::vector < MyWeapon*>bullets;
 	
@@ -23,8 +28,13 @@ int main(void)
 
 	my_canvas.show([&]
 	{
+		for (int i = 0; i < c.height; i++) {
+			for (int j = 0; j < c.width; j++) {
+				my_canvas.drawDot(vec3(c.arr[i*c.width + j].rgbBlue , c.arr[i*c.width + j].rgbGreen, c.arr[i*c.width + j].rgbRed) / 255.0f, vec3(0.0 + (float)i / 1000, 0.0 + (float)j / 1000, 0.0));
+			}
+		}
 			my_canvas.drawDot(RGBColors::red, vec3(0.0, 0.0, 0.0));
-
+			
 		/*
 		// update
 
