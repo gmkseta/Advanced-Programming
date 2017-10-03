@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DigitalCanvas2D.cpp" />
+    <ClCompile Include="image.cpp" />
     <ClCompile Include="iron.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="DigitalCanvas2D.h" />
     <ClInclude Include="iron.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="ReadBmp.h" />
     <ClInclude Include="RGBColors.h" />
     <ClInclude Include="Tank.h" />
   </ItemGroup>

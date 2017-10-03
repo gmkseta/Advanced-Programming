@@ -5,6 +5,7 @@
     <ClCompile Include="DigitalCanvas2D.cpp" />
     <ClCompile Include="iron.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DigitalCanvas2D.h" />
@@ -12,5 +13,6 @@
     <ClInclude Include="iron.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Tank.h" />
+    <ClInclude Include="ReadBmp.h" />
   </ItemGroup>
 </Project>

@@ -12,8 +12,8 @@ DigitalCanvas2D my_canvas("This is my digital canvas!", 1024, 768); // Canvas : 
 int main(void)
 {
 	float time = 0.0;
-	vec3
-	//MyTank tank{ my_canvas ,init,init};
+	
+		//MyTank tank{ my_canvas ,init,init};
 
 //	std::vector < MyWeapon*>bullets;
 	
