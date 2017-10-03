@@ -30,7 +30,9 @@ int main(void)
 	{
 		for (int i = 0; i < c.height; i++) {
 			for (int j = 0; j < c.width; j++) {
-				my_canvas.drawDot(vec3(c.arr[i*c.width + j].rgbBlue , c.arr[i*c.width + j].rgbGreen, c.arr[i*c.width + j].rgbRed) / 255.0f, vec3(0.0 + (float)i / 1000, 0.0 + (float)j / 1000, 0.0));
+				vec3 k = vec3(c.arr[i*c.width + j].rgbRed, c.arr[i*c.width + j].rgbGreen, c.arr[i*c.width + j].rgbBlue)/255.0f;
+
+				my_canvas.drawDot(k, vec3(0.0 + (float)j / 400, 0.0 + (float)i / 400, 0.0));
 			}
 		}
 			my_canvas.drawDot(RGBColors::red, vec3(0.0, 0.0, 0.0));
