@@ -12,15 +12,17 @@ public:
 	_RGBTRIPLE* arr;
 	int width;
 	int height;
+	Bitmap temp;
 
-	GameObject(){
-		x = 0; y = 0; width = 0; height = 0;
+	GameObject(const char* filename){
 		arr = nullptr;
+		temp.readBmpImage(filename);
+		
 	}
-	void init_image(Bitmap* s) {
-		this->arr = s->pixels;
-		this->width = s->ih.biWidth;
-		this->height = s->ih.biHeight;
+	void init_image() {
+		this->arr = temp.pixels;
+		this->width = temp.ih.biWidth;
+		this->height = temp.ih.biHeight;
 
 	}
 

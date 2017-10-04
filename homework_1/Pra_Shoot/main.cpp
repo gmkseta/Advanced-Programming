@@ -13,11 +13,10 @@ DigitalCanvas2D my_canvas("This is my digital canvas!", 1024, 768); // Canvas : 
 
 int main(void)
 {
-	char* hi = "lena.bmp";
-	Bitmap temp(hi);
+	//Bitmap temp("image/User_Plane.bmp");
 	float time = 0.0;
-	GameObject c;
-	c.init_image(&temp);
+	GameObject c("image/User_Plane.bmp");
+	c.init_image();
 	//MyTank tank{ my_canvas ,init,init};
 
 //	std::vector < MyWeapon*>bullets;
@@ -28,11 +27,11 @@ int main(void)
 
 	my_canvas.show([&]
 	{
-		for (int i = 0; i < c.height; i++) {
+		for (int i = 0; i < c.height-1; i++) {
 			for (int j = 0; j < c.width; j++) {
 				vec3 k = vec3(c.arr[i*c.width + j].rgbRed, c.arr[i*c.width + j].rgbGreen, c.arr[i*c.width + j].rgbBlue)/255.0f;
 
-				my_canvas.drawDot(k, vec3(0.0 + (float)j / 400, 0.0 + (float)i / 400, 0.0));
+				my_canvas.drawDot(k, vec3(0.0 + (float)(j) / 400, 0.0 + (float)i / 400, 0.0));
 			}
 		}
 			my_canvas.drawDot(RGBColors::red, vec3(0.0, 0.0, 0.0));
