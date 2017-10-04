@@ -16,11 +16,12 @@ int main(void)
 	//Bitmap temp("image/User_Plane.bmp");
 	float time = 0.0;
 	PlayerPlane c("image/User_Plane.bmp");
-	GameObject background("image/background.bmp",-1.05,-1.0);
+	GameObject background("image/background.bmp",-1.05f,-1.0f);
 	//c.init_image();
 	//MyTank tank{ my_canvas ,init,init};
 
 	//	std::vector < MyWeapon*>bullets;
+	PlayerBullet* basicBullet=nullptr;
 
 
 	//	MyWeapon *laser = nullptr;
@@ -28,28 +29,38 @@ int main(void)
 
 	my_canvas.show([&]
 	{
-		if (my_canvas.isKeyPressed(GLFW_KEY_LEFT))	c._center.x -= 0.01;
+		if (my_canvas.isKeyPressed(GLFW_KEY_LEFT))	c._center.x -= 0.01f;
 
-		if (my_canvas.isKeyPressed(GLFW_KEY_RIGHT))	c._center.x += 0.01;
+		if (my_canvas.isKeyPressed(GLFW_KEY_RIGHT))	c._center.x += 0.01f;
 
-		if (my_canvas.isKeyPressed(GLFW_KEY_DOWN)) c._center.y -= 0.01;
+		if (my_canvas.isKeyPressed(GLFW_KEY_DOWN)) c._center.y -= 0.01f;
 
-		if (my_canvas.isKeyPressed(GLFW_KEY_UP)) c._center.y += 0.01;
+		if (my_canvas.isKeyPressed(GLFW_KEY_UP)) c._center.y += 0.01f;
+		
+		if (my_canvas.isKeyPressed(GLFW_KEY_SPACE))
+		{
+			if (basicBullet != nullptr)delete basicBullet;
+			basicBullet = new PlayerBullet("image/bullet.bmp");
 
+			basicBullet->shoot(c._center);
+		}
 
-		background.drawObject(my_canvas);
+		background.drawObjectLowQuality(my_canvas,12);
+		if (basicBullet != nullptr) {
+			basicBullet->drawObject(my_canvas);
+
+			basicBullet->drawObject(my_canvas,-0.07f);
+			basicBullet->update(1 / 60.f);
+		}
+
 		c.drawObject(my_canvas);
 		/*
 		// update
 		
-		// move tank
-		if (my_canvas.isKeyPressed(GLFW_KEY_LEFT))	tank.center_.x -= 0.01;
-		if (my_canvas.isKeyPressed(GLFW_KEY_RIGHT))	tank.center_.x += 0.01;
-		if (my_canvas.isKeyPressed(GLFW_KEY_DOWN)) tank.center_.y -= 0.01;
-		if (my_canvas.isKeyPressed(GLFW_KEY_UP)) tank.center_.y += 0.01;
 
 
 		// shoot a cannon ball
+
 		if (my_canvas.isKeyPressed(GLFW_KEY_SPACE))
 		{
 		int index = bullets.size();
@@ -95,6 +106,7 @@ int main(void)
 		//	delete[] bullets[bullets.size()];
 		time += 1 / 60.0;
 		*/
+		time += 1 / 60.0;
 	}
 	);
 

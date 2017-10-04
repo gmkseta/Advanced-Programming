@@ -131,7 +131,20 @@ public:
 		}
 		glEnd();
 	}
+	void drawBigDot(const glm::vec3& color,const float& wbit,const float& x,const float& y)
+	{
+		const glm::vec2 left_bottom(x, y);
 
+		glColor3fv(&color[0]);
+		glBegin(GL_QUADS);
+		{
+			glVertex2f(left_bottom.x, left_bottom.y);
+			glVertex2f(left_bottom.x + wbit, left_bottom.y);
+			glVertex2f(left_bottom.x + wbit, left_bottom.y + wbit);
+			glVertex2f(left_bottom.x, left_bottom.y + wbit);
+		}
+		glEnd();
+	}
 	void drawFilledCircle(const glm::vec3& color, const float& radius, const int& num_segments = 100)
 	{
 		const float d_theta = (float)(glm::half_pi<float>() * 4.0 / (float)num_segments);

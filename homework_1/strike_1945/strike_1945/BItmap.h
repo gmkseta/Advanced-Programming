@@ -65,7 +65,6 @@ public:
 		int padding = 0;
 		unsigned char *temp;
 		file = fopen(filename, "rb");
-		std::cout << sizeof(_BITMAPFILEHEADER) << std::endl;
 		if (file != NULL) { // file opened
 			size_t x = fread(&fh, sizeof(_BITMAPFILEHEADER), 1, file); //reading the FILEHEADER
 			fread(&this->ih, sizeof(_BITMAPINFOHEADER), 1, file);
