@@ -1,5 +1,3 @@
-// Written by Jeong-Mo Hong
-
 #pragma once
 
 #include <GL/glew.h>
@@ -59,13 +57,13 @@ public:
 
 	void reportErrorAndExit(const std::string& function_name, const std::string& message)
 	{
-		std::cout << "Error: " << function_name <<" "<< message << std::endl;
+		std::cout << "Error: " << function_name << " " << message << std::endl;
 
 		glfwTerminate();
 		getchar(); // pause to read error message
 		exit(1);
 	}
-	
+
 	float getRadian(const float& degree) // degree to radian
 	{
 		return (float)(degree / 180.0f * glm::half_pi<float>() * 2.0);
@@ -119,7 +117,7 @@ public:
 
 	void drawFilledBox(const glm::vec3& color, const float& width, const float& height)
 	{
-		const glm::vec2 left_bottom(-0.5*width, - 0.5*height);
+		const glm::vec2 left_bottom(-0.5*width, -0.5*height);
 
 		glColor3fv(&color[0]);
 		glBegin(GL_QUADS);

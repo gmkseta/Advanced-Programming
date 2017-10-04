@@ -3,6 +3,7 @@
 #include "RGBColors.h"
 #include <iostream>
 #include <vector>
+#include "glm\vec3.hpp"
 class MyTank
 {
 public:
