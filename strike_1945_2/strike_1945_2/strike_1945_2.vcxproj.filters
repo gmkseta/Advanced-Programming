@@ -13,28 +13,28 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\hi">
-      <UniqueIdentifier>{405c895a-287d-49a9-bfc9-5000978bf128}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\ScreenManager">
+    <Filter Include="소스 파일\PlayGame">
       <UniqueIdentifier>{d14f61af-40b0-4c83-b5b1-0496238e6660}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\ScreenManager\Game1">
-      <UniqueIdentifier>{573abff3-2d0f-4e5c-a70d-8b2285c07c7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\ScreenManager\Screen">
+    <Filter Include="소스 파일\PlayGame\Screen">
       <UniqueIdentifier>{5232334b-4c49-4de0-a379-499c6b61d772}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\ScreenManager\Game1\GObject">
+    <Filter Include="소스 파일\Professor">
+      <UniqueIdentifier>{405c895a-287d-49a9-bfc9-5000978bf128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\PlayGame\Game">
+      <UniqueIdentifier>{573abff3-2d0f-4e5c-a70d-8b2285c07c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\PlayGame\Game\GObject">
       <UniqueIdentifier>{6e9249a5-896e-4525-9166-d8014916f569}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\ScreenManager\Game1\GObject\User">
+    <Filter Include="소스 파일\PlayGame\Game\GObject\User">
       <UniqueIdentifier>{9130e8f4-ef4e-4291-b1f6-16616d56066d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\ScreenManager\Game1\GObject\User\Weapon">
+    <Filter Include="소스 파일\PlayGame\Game\GObject\User\Weapon">
       <UniqueIdentifier>{2417fc1d-b684-4fa2-8176-0ee247e05402}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\ScreenManager\Game1\GObject\Map">
+    <Filter Include="소스 파일\PlayGame\Game\GObject\Map">
       <UniqueIdentifier>{432d202a-e3ab-41c0-8371-45c169c667c4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -49,31 +49,31 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Bitmap.h">
-      <Filter>소스 파일\hi</Filter>
+      <Filter>소스 파일\Professor</Filter>
     </ClInclude>
     <ClInclude Include="Screen.h">
-      <Filter>소스 파일\ScreenManager\Screen</Filter>
+      <Filter>소스 파일\PlayGame\Screen</Filter>
     </ClInclude>
     <ClInclude Include="User.h">
-      <Filter>소스 파일\ScreenManager\Game1\GObject\User</Filter>
+      <Filter>소스 파일\PlayGame\Game\GObject\User</Filter>
     </ClInclude>
     <ClInclude Include="gameObject.h">
-      <Filter>소스 파일\ScreenManager\Game1\GObject</Filter>
-    </ClInclude>
-    <ClInclude Include="DigitalCanvas2D.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="RGBColors.h">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\PlayGame\Game\GObject</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
-      <Filter>소스 파일\ScreenManager\Game1\GObject\User\Weapon</Filter>
+      <Filter>소스 파일\PlayGame\Game\GObject\User\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
-      <Filter>소스 파일\ScreenManager\Game1\GObject\Map</Filter>
+      <Filter>소스 파일\PlayGame\Game\GObject\Map</Filter>
     </ClInclude>
     <ClInclude Include="GameBoard.h">
-      <Filter>소스 파일\ScreenManager\Game1</Filter>
+      <Filter>소스 파일\PlayGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="RGBColors.h">
+      <Filter>소스 파일\Professor</Filter>
+    </ClInclude>
+    <ClInclude Include="DigitalCanvas2D.h">
+      <Filter>소스 파일\Professor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -84,19 +84,19 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Screen.cpp">
-      <Filter>소스 파일\ScreenManager\Screen</Filter>
+      <Filter>소스 파일\PlayGame\Screen</Filter>
     </ClCompile>
     <ClCompile Include="User.cpp">
-      <Filter>소스 파일\ScreenManager\Game1\GObject\User</Filter>
+      <Filter>소스 파일\PlayGame\Game\GObject\User</Filter>
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
-      <Filter>소스 파일\ScreenManager\Game1\GObject\User\Weapon</Filter>
+      <Filter>소스 파일\PlayGame\Game\GObject\User\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>소스 파일\ScreenManager\Game1\GObject\Map</Filter>
+      <Filter>소스 파일\PlayGame\Game\GObject\Map</Filter>
     </ClCompile>
     <ClCompile Include="GameBoard.cpp">
-      <Filter>소스 파일\ScreenManager\Game1</Filter>
+      <Filter>소스 파일\PlayGame\Game</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

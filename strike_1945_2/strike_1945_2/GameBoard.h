@@ -19,10 +19,10 @@ public:
 	GameBoard(DigitalCanvas2D* my_canvas);
 	~GameBoard(void);
 
-	HRESULT Init();
-	HRESULT Draw();
+	void Init();
+	void Draw();
 	int ScreenUpdate(float delta);
-	HRESULT Destroy();
+	void Destroy();
 
 	BOOL Collision(RECT_POINT *r1, RECT_POINT *r2);
 

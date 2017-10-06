@@ -15,7 +15,7 @@ GameBoard::~GameBoard(void)
 	delete(myMap);
 }
 
-HRESULT GameBoard::Init()
+void GameBoard::Init()
 {
 
 	
@@ -34,10 +34,9 @@ HRESULT GameBoard::Init()
 
 	//CEnemy::EnemyTextureObject = TexContainer[ENEMY];
 
-	return S_OK;
 }
 
-HRESULT GameBoard::Draw()
+void GameBoard::Draw()
 {
 	glMatrixMode(GL_MODELVIEW); //매트릭스 연산을 쓰겠다.
 	glLoadIdentity(); //매트릭스 연산 초기화
@@ -83,7 +82,6 @@ HRESULT GameBoard::Draw()
 	///////////////////////////////////////////////////////////
 
 
-	return S_OK;
 }
 
 
@@ -148,10 +146,8 @@ int GameBoard::ScreenUpdate(float delta)
 	return 0;
 }
 
-HRESULT GameBoard::Destroy()
+void GameBoard::Destroy()
 {
-
-	return S_OK;
 }
 //
 //BOOL CGameScreen::Collision(FRECT *r1, FRECT*r2)
