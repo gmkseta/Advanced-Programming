@@ -3,7 +3,9 @@
 
 CGameScreen::CGameScreen(DigitalCanvas2D* my_canvas)
 {
-	my_user = new User(my_canvas);//m_pHero = new CHero;
+	myUser = new User();
+	_canvas = my_canvas;
+	//m_pHero = new CHero;
 	//m_pStage = new CStage;
 }
 
@@ -19,12 +21,16 @@ HRESULT CGameScreen::Init()
 	
 	LoadBmpImg("image/_stage.bmp", _BACKGROUND);
 	LoadBmpImg("image/User_Plane.bmp", _USER);
-	LoadBmpImg("image/missle.bmp", _MISSLE);
+	LoadBmpImg("image/bullet.bmp", _MISSLE);
 	LoadBmpImg("image/MiniEnemy2.bmp", _ENEMY);
 
 	
-	my_user->Init(bmpImage[_USER]);
+	myUser->Init(bmpImage[_USER],_canvas);
 	//m_pStage->Init(TexContainer[STAGE1]);
+	for (int i = 0; i != MAXSHOT; i++) {
+		myBullets[i].Init(bmpImage[_MISSLE],_canvas);
+	}
+
 	//CMissle::MissleTextureObject = TexContainer[MISSLE];
 	//CEnemy::EnemyTextureObject = TexContainer[ENEMY];
 
@@ -36,20 +42,20 @@ HRESULT CGameScreen::Draw()
 	glMatrixMode(GL_MODELVIEW); //매트릭스 연산을 쓰겠다.
 	glLoadIdentity(); //매트릭스 연산 초기화
 
-					  //맵 랜더링
+	//맵 랜더링
 	//m_pStage->Render();
 
 	//유저 랜더링
-	my_user->Draw();
+	myUser->Draw();
 
 
 	////미사일 랜더링
-	//for (int i = 0; i != MAXSHOT; i++)
-	//{
-	//	if (m_cMissle[i].Draw())
-	//		m_vMyMissleRect.push_back(m_cMissle[i].GetRect());
+	for (int i = 0; i != MAXSHOT; i++)
+	{
+		if (myBullets[i].Draw())
+			m_vMyMissleRect.push_back(myBullets[i].GetRect());
 
-	//}
+	}
 
 	////적비행기
 	//for (int i = 0; i <MAXENEMY; i++)
@@ -84,21 +90,20 @@ HRESULT CGameScreen::Draw()
 int CGameScreen::ScreenUpdate(float delta)
 {
 	//////////////////// 미사일 관련 동작 //////////////////////
-	//static float MissleDelay = 0;
+	static float MissleDelay = 0;
 
-	//BOOL Missle = ((GetAsyncKeyState('X') & 0x8000) == 0x8000);
 
-	//if (Missle)
-	//{
-	//	if (MissleDelay <= 0)
-	//	{
-	//		int ShotNumber = m_pHero->GetShotNumber();
-	//		m_cMissle[ShotNumber].Init(m_pHero->GetPosX() + 3.25f, m_pHero->GetRect()->top);
-	//		MissleDelay = 0.10f;
-	//	}
-	//}
+	if (_canvas->isKeyPressed(GLFW_KEY_SPACE))
+	{
+		if (MissleDelay <= 0)
+		{
+			int ShotNumber = myUser->GetBulletNum();
+			myBullets[ShotNumber].reRectPoint(myUser->GetPosX() + myUser->width/1024, myUser->GetRect()->top);
+			MissleDelay = 0.10f;
+		}
+	}
 
-	//if (MissleDelay > 0) MissleDelay -= delta;
+	if (MissleDelay > 0) MissleDelay -= delta;
 	///////////////////////////////////////////////////////////
 
 	////////////////////// 적비행기 관련 동작 //////////////////////
@@ -130,11 +135,11 @@ int CGameScreen::ScreenUpdate(float delta)
 	//m_pStage->Update(delta);
 
 	//유저 Update
-	my_user->Update(delta);
+	myUser->Update(delta);
 
 	////미사일 Update
-	//for (int i = 0; i != MAXSHOT; i++)
-	//	m_cMissle[i].Update(delta);
+	for (int i = 0; i != MAXSHOT; i++)
+		myBullets[i].Update(delta);
 
 	////적비행기 Update
 	//for (int i = 0; i <MAXENEMY; i++)

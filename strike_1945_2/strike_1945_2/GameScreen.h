@@ -7,6 +7,7 @@
 
 #include "Screen.h"
 #include "User.h"
+#include "Weapon.h"
 
 enum IMG { _BACKGROUND, _USER, _MISSLE, _ENEMY };
 
@@ -26,9 +27,9 @@ public:
 	BOOL Collision(RECT_POINT *r1, RECT_POINT *r2);
 
 private:
-	User		*my_user;
+	User		*myUser;
 	//CStage		*m_pStage;
-	//CMissle		m_cMissle[MAXSHOT];
+	Weapon		myBullets[MAXSHOT];
 
 	int			EnemyIdx;
 	//CEnemy		m_cEnemy[MAXENEMY];
@@ -37,5 +38,6 @@ private:
 	std::vector<RECT_POINT*>			m_vMyMissleRect;
 	std::vector<RECT_POINT*>			m_vEnermyRect;
 
+	DigitalCanvas2D* _canvas=nullptr;
 
 };

@@ -3,16 +3,19 @@
 // 정의 & 상수
 //-------------------------------------------------------------
 #define SPEED 2.0f
-#define MAXSHOT 30
+#define MAXSHOT 15
 
 
 class User: public GameObject
 {
 public:
-	User(DigitalCanvas2D* my_canvas);
+	//User(DigitalCanvas2D* my_canvas);
+	User(void);
 	~User(void);
-	DigitalCanvas2D* _canvas=nullptr;
-	void Init(Bitmap bmpImage);
+	DigitalCanvas2D* _canvas;
+
+
+	void Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas);//, DigitalCanvas2D* my_canvas);
 	void UI();
 	void Draw();
 	void Update(float delta);
@@ -29,16 +32,16 @@ public:
 	void	SetPosition(float &x, float &y);
 
 	//유저의 슈팅 번호
-	int GetShotNumber() {
-		m_iShotNumber = ++m_iShotNumber % MAXSHOT;
-		return m_iShotNumber;
+	int GetBulletNum() {
+		myBulletNum = ++myBulletNum % MAXSHOT;
+		return myBulletNum;
 	}
 
 private:
 	RECT_POINT		rectPos;
 	float			m_fAnimation;
 	float			m_fAnimationMaxPoint;
-	int				m_iShotNumber;
+	int				myBulletNum;
 	
 
 };

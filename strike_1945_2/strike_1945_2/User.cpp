@@ -1,24 +1,23 @@
 #include "stdafx.h"
 #include "User.h"
 
-User::User(DigitalCanvas2D* my_canvas) 
-{
-	_canvas = my_canvas;
-}
+User::User(void) 
+{}
 
 User::~User(void)
 {
 	//Destroy();
 }
 
-void User::Init(Bitmap bmpImage)
+void User::Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas)
 {
 	
 	//처음 시작 위치
-	
+	_canvas = my_canvas;
+
 	//초기화
 	m_fAnimation = 0;
-	m_iShotNumber = 0;
+	myBulletNum = 0;
 	m_fAnimationMaxPoint = 3;
 
 	arr = bmpImage.pixels;
@@ -50,46 +49,34 @@ void User::Update(float delta)
 	
 	
 	//LEFT 버튼이 눌렸을 경우
-	if (_canvas->isKeyPressed(GLFW_KEY_LEFT))	this->_center.x -= SPEED*delta;
+	if (_canvas->isKeyPressed(GLFW_KEY_LEFT))_center.x -= SPEED*delta;
 
-	if (_canvas->isKeyPressed(GLFW_KEY_RIGHT))	this->_center.x += SPEED*delta;
+	if (_canvas->isKeyPressed(GLFW_KEY_RIGHT))_center.x += SPEED*delta;
 
-	if (_canvas->isKeyPressed(GLFW_KEY_DOWN))this->_center.y -= SPEED*delta;
+	if (_canvas->isKeyPressed(GLFW_KEY_DOWN))_center.y -= SPEED*delta;
 
-	if (_canvas->isKeyPressed(GLFW_KEY_UP))this->_center.y += SPEED*delta;
+	if (_canvas->isKeyPressed(GLFW_KEY_UP))_center.y += SPEED*delta;
 
-	//if (Left && !Right)
-	//	m_fPosX -= SPEED * delta;
-	//else//RIGHT
-	//	if (Right && !Left)
-	//		m_fPosX += SPEED * delta;
-
-	////UP
-	//if (Up && !Down)
-	//	m_fPosY += SPEED * delta;
-	//else//DOWN
-	//	if (Down && !Up)
-	//		m_fPosY -= SPEED * delta;
-
+	
 	////이동할 수 있는 지역일 경우 SetPosition
-	//if (CheckPosition(m_fPosX, m_fPosY))
-	//	SetPosition(m_fPosX, m_fPosY);
+	if (CheckPosition(_center.x, _center.y)) 
+		SetPosition(_center.x, _center.y);
 
 }
 
 BOOL User::CheckPosition(float &x, float &y)
 {
-	if (x + 6.5f >= 51.2f || x <= 0.0f) x = rectPos.left;
-	if (y + 4.4f >= 65.0f || y <= 0.4f) y = rectPos.bottom;
+	if (x + (float)width/512 >= 1.0f || x <= -1.0f) x = rectPos.left;
+	if (y + (float)height/512 >= 1.0f || y <= -1.0f) y = rectPos.bottom;
 
 	return TRUE;
 }
 
 void User::SetPosition(float &x, float &y)
 {
-	rectPos.top = y + 4.4f;
+	rectPos.top = y + (float)height/512;
 	rectPos.left = x + 0.0f;
-	rectPos.right = x + 6.5f;
+	rectPos.right = x + (float)width / 512;
 	rectPos.bottom = y + 0.0f;
 }
 

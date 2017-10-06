@@ -3,10 +3,11 @@
 class Weapon:public GameObject
 {
 public:
-	Weapon(void);
+	Weapon();
 	~Weapon(void);
 
-	void Init(float x, float y);
+	void Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas);
+	void reRectPoint(float x, float y);
 	BOOL Draw();
 	BOOL Update(float delta);
 	void Destroy();
@@ -14,6 +15,7 @@ public:
 	RECT_POINT* GetRect() { return &rectPos; }
 
 	static unsigned int	MissleTextureObject;
+	DigitalCanvas2D* _canvas = nullptr;
 
 private:
 	RECT_POINT			rectPos;

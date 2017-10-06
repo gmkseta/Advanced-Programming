@@ -52,7 +52,8 @@ void Update()
 		FrameCnt = 0;
 	}
 	lastTime = currentTime;
-
+	//canvas Weapon 에서 init 약간 다른거 같음
+	//printf("%2lf ", timeDelta);
 
 }
 int main(void)
