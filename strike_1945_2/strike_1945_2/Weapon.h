@@ -1,5 +1,7 @@
 #pragma once
 
+#define USER_WIDTH 
+#define USER_HEIGHT
 class Weapon:public GameObject
 {
 public:

@@ -17,8 +17,8 @@ void Map::Init(Bitmap bmpImage, DigitalCanvas2D *my_canvas)
 	arr = bmpImage.pixels;
 	width = bmpImage.ih.biWidth;
 	height = bmpImage.ih.biHeight;
-	_center.x =  - width / 1024;
-	_center.y = - height / 1024;
+	_center.x =  -(float)width / 1024;
+	_center.y = -(float)height / 1024;
 	Position = 0;
 
 

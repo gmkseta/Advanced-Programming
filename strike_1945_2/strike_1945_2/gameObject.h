@@ -17,7 +17,7 @@ public:
 		for (int i = 0; i < this->height - 1; i++) {
 			for (int j = 0; j < this->width; j++) {
 				vec3 k = vec3(this->arr[i*this->width + j].rgbRed, this->arr[i*this->width + j].rgbGreen, this->arr[i*this->width + j].rgbBlue) / 255.0f;
-				if (k.r != 1.0f&&k.g != 1.0f&&k.b != 1.0f)
+				if (k!=RGBColors::black)// k.r != 0.0f&&k.g != 0.0f&&k.b != 0.0f)
 					_canvas.drawDot(k, vec3(_center.x + plusX + (float)(j) / 512, _center.y + plusY + (float)i / 512, 0.0));
 			}
 		}

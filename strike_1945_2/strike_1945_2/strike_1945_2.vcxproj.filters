@@ -37,6 +37,9 @@
     <Filter Include="소스 파일\PlayGame\Game\GObject\Map">
       <UniqueIdentifier>{432d202a-e3ab-41c0-8371-45c169c667c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\PlayGame\Game\GObject\Enemy">
+      <UniqueIdentifier>{28066725-6e28-4935-bf39-4081f39b38ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

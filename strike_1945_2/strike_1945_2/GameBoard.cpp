@@ -41,14 +41,14 @@ void GameBoard::Draw()
 	glMatrixMode(GL_MODELVIEW); //매트릭스 연산을 쓰겠다.
 	glLoadIdentity(); //매트릭스 연산 초기화
 
-	//맵 랜더링
+	//맵 그리기
 	myMap->Draw();
 
-	//유저 랜더링
+	//유저 그리기
 	myUser->Draw();
 
 
-	////미사일 랜더링
+	////총알 그리기
 	for (int i = 0; i != MAXSHOT; i++)
 	{
 		if (myBullets[i].Draw())
@@ -96,7 +96,7 @@ int GameBoard::ScreenUpdate(float delta)
 		if (MissleDelay <= 0)
 		{
 			int ShotNumber = myUser->GetBulletNum();
-			myBullets[ShotNumber].reRectPoint(myUser->GetPosX() + myUser->width/1024, myUser->GetRect()->top);
+			myBullets[ShotNumber].reRectPoint(myUser->GetPosX() + (float) myUser->width / 1024, myUser->GetRect()->top);
 			MissleDelay = 0.10f;
 		}
 	}
