@@ -31,6 +31,9 @@
     <Filter Include="소스 파일\ScreenManager\Game1\GObject\User">
       <UniqueIdentifier>{9130e8f4-ef4e-4291-b1f6-16616d56066d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\ScreenManager\Game1\GObject\User\Weapon">
+      <UniqueIdentifier>{2417fc1d-b684-4fa2-8176-0ee247e05402}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -63,6 +66,9 @@
     <ClInclude Include="RGBColors.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>소스 파일\ScreenManager\Game1\GObject\User\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -79,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="User.cpp">
       <Filter>소스 파일\ScreenManager\Game1\GObject\User</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>소스 파일\ScreenManager\Game1\GObject\User\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

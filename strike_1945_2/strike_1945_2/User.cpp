@@ -52,11 +52,11 @@ void User::Update(float delta)
 	//LEFT 버튼이 눌렸을 경우
 	if (_canvas->isKeyPressed(GLFW_KEY_LEFT))	this->_center.x -= SPEED*delta;
 
-	if (_canvas->isKeyPressed(GLFW_KEY_RIGHT))	this->_center.x += 0.01f;
+	if (_canvas->isKeyPressed(GLFW_KEY_RIGHT))	this->_center.x += SPEED*delta;
 
-	if (_canvas->isKeyPressed(GLFW_KEY_DOWN))this->_center.y -= 0.01f;
+	if (_canvas->isKeyPressed(GLFW_KEY_DOWN))this->_center.y -= SPEED*delta;
 
-	if (_canvas->isKeyPressed(GLFW_KEY_UP))this->_center.y += 0.01f;
+	if (_canvas->isKeyPressed(GLFW_KEY_UP))this->_center.y += SPEED*delta;
 
 	//if (Left && !Right)
 	//	m_fPosX -= SPEED * delta;
@@ -79,18 +79,18 @@ void User::Update(float delta)
 
 BOOL User::CheckPosition(float &x, float &y)
 {
-	if (x + 6.5f >= 51.2f || x <= 0.0f) x = m_rPos.left;
-	if (y + 4.4f >= 65.0f || y <= 0.4f) y = m_rPos.bottom;
+	if (x + 6.5f >= 51.2f || x <= 0.0f) x = rectPos.left;
+	if (y + 4.4f >= 65.0f || y <= 0.4f) y = rectPos.bottom;
 
 	return TRUE;
 }
 
 void User::SetPosition(float &x, float &y)
 {
-	m_rPos.top = y + 4.4f;
-	m_rPos.left = x + 0.0f;
-	m_rPos.right = x + 6.5f;
-	m_rPos.bottom = y + 0.0f;
+	rectPos.top = y + 4.4f;
+	rectPos.left = x + 0.0f;
+	rectPos.right = x + 6.5f;
+	rectPos.bottom = y + 0.0f;
 }
 
 
