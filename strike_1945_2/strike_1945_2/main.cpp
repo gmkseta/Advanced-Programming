@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "GameScreen.h"
+#include "GameBoard.h"
 #include <Windows.h>
 #include <mmsystem.h>
 using namespace std;
@@ -18,8 +18,8 @@ float FPS = 0.0f;
 int FrameCnt = 0;
 float timeElapsed = 0.0f;
 
-DigitalCanvas2D my_canvas("This is my digital canvas!", 1024, 1000); // Canvas : (-1.0, -1.0) x (1.0, 1.0)
-CGameScreen* Game = new CGameScreen(&my_canvas);
+DigitalCanvas2D my_canvas("This is my digital canvas!", 1024, 1024); // Canvas : (-1.0, -1.0) x (1.0, 1.0)
+GameBoard* Game = new GameBoard(&my_canvas);
 float delta = 0.1f;
 
 

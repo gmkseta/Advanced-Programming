@@ -30,6 +30,14 @@ public:
 			}
 		}
 	}
-
+	void drawMapLowQuality(DigitalCanvas2D _canvas, int q,float position) {
+		for (int i = 0; i < this->height - 1; i += q) {
+			for (int j = 0; j < this->width; j += q) {
+				int h = (i + (int)position) % height;
+				vec3 k = vec3(this->arr[h*this->width + j].rgbRed, this->arr[h*this->width + j].rgbGreen, this->arr[h*this->width + j].rgbBlue) / 255.0f;
+				_canvas.drawBigDot(k, (float)q / 512, _center.x + (float)(j) / 512, _center.y + (float)i / 512);
+			}
+		}
+	}
 
 };

@@ -34,6 +34,9 @@
     <Filter Include="소스 파일\ScreenManager\Game1\GObject\User\Weapon">
       <UniqueIdentifier>{2417fc1d-b684-4fa2-8176-0ee247e05402}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\ScreenManager\Game1\GObject\Map">
+      <UniqueIdentifier>{432d202a-e3ab-41c0-8371-45c169c667c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -44,9 +47,6 @@
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScreen.h">
-      <Filter>소스 파일\ScreenManager\Game1</Filter>
     </ClInclude>
     <ClInclude Include="Bitmap.h">
       <Filter>소스 파일\hi</Filter>
@@ -69,6 +69,12 @@
     <ClInclude Include="Weapon.h">
       <Filter>소스 파일\ScreenManager\Game1\GObject\User\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>소스 파일\ScreenManager\Game1\GObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GameBoard.h">
+      <Filter>소스 파일\ScreenManager\Game1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -76,9 +82,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScreen.cpp">
-      <Filter>소스 파일\ScreenManager\Game1</Filter>
     </ClCompile>
     <ClCompile Include="Screen.cpp">
       <Filter>소스 파일\ScreenManager\Screen</Filter>
@@ -88,6 +91,12 @@
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>소스 파일\ScreenManager\Game1\GObject\User\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>소스 파일\ScreenManager\Game1\GObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="GameBoard.cpp">
+      <Filter>소스 파일\ScreenManager\Game1</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

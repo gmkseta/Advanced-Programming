@@ -141,9 +141,10 @@
   <ItemGroup>
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="gameObject.h" />
-    <ClInclude Include="GameScreen.h">
+    <ClInclude Include="GameBoard.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Map.h" />
     <ClInclude Include="RGBColors.h" />
     <ClInclude Include="Screen.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -155,9 +156,10 @@
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameScreen.cpp">
+    <ClCompile Include="GameBoard.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Screen.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
