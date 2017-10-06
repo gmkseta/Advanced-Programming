@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\hi">
+      <UniqueIdentifier>{405c895a-287d-49a9-bfc9-5000978bf128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ScreenManager">
+      <UniqueIdentifier>{d14f61af-40b0-4c83-b5b1-0496238e6660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ScreenManager\Game1">
+      <UniqueIdentifier>{573abff3-2d0f-4e5c-a70d-8b2285c07c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ScreenManager\Screen">
+      <UniqueIdentifier>{5232334b-4c49-4de0-a379-499c6b61d772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ScreenManager\Game1\GObject">
+      <UniqueIdentifier>{6e9249a5-896e-4525-9166-d8014916f569}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ScreenManager\Game1\GObject\User">
+      <UniqueIdentifier>{9130e8f4-ef4e-4291-b1f6-16616d56066d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScreen.h">
+      <Filter>소스 파일\ScreenManager\Game1</Filter>
+    </ClInclude>
+    <ClInclude Include="Bitmap.h">
+      <Filter>소스 파일\hi</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>소스 파일\ScreenManager\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>소스 파일\ScreenManager\Game1\GObject\User</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObject.h">
+      <Filter>소스 파일\ScreenManager\Game1\GObject</Filter>
+    </ClInclude>
+    <ClInclude Include="DigitalCanvas2D.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RGBColors.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScreen.cpp">
+      <Filter>소스 파일\ScreenManager\Game1</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen.cpp">
+      <Filter>소스 파일\ScreenManager\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>소스 파일\ScreenManager\Game1\GObject\User</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

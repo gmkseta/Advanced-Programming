@@ -1,6 +1,5 @@
 #pragma once
-
-#include <glm\glm.hpp>
+#include "stdafx.h"
 
 namespace RGBColors
 {
@@ -18,5 +17,4 @@ namespace RGBColors
 	const vec3 black(vec3(0, 0, 0) / 255.0f);
 	const vec3 white(vec3(1, 1, 1) / 255.0f);
 }
-
 
