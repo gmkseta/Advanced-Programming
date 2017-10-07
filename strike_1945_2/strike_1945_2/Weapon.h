@@ -17,7 +17,7 @@ public:
 	RECT_POINT* GetRect() { return &rectPos; }
 
 	static unsigned int	MissleTextureObject;
-	DigitalCanvas2D* _canvas = nullptr;
+	
 
 private:
 	RECT_POINT			rectPos;

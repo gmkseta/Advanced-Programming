@@ -12,11 +12,10 @@ public:
 	//User(DigitalCanvas2D* my_canvas);
 	User(void);
 	~User(void);
-	DigitalCanvas2D* _canvas;
+	
 
 
 	void Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas);//, DigitalCanvas2D* my_canvas);
-	void UI();
 	void Draw();
 	void Update(float delta);
 	void Destroy();

@@ -9,6 +9,7 @@ public:
 	int height;
 	vec3 _center;
 	_RGBTRIPLE* arr=nullptr;
+	DigitalCanvas2D* _canvas = nullptr;
 
 	GameObject(){};
 	~GameObject() {};

@@ -59,8 +59,8 @@ BOOL Weapon::Update(float delta)
 	//화면 안에 미사일이 있을 경우 TRUE를 반환
 	if (rectPos.bottom > -1.0f)
 	{
-		rectPos.top += 3.0f * delta;
-		rectPos.bottom += 3.0f * delta;
+		rectPos.top += 2.0f * delta;
+		rectPos.bottom += 2.0f * delta;
 		_center.y = rectPos.bottom;
 		return TRUE;
 	}

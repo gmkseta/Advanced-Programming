@@ -78,6 +78,9 @@
     <ClInclude Include="DigitalCanvas2D.h">
       <Filter>소스 파일\Professor</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>소스 파일\PlayGame\Game\GObject\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -100,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="GameBoard.cpp">
       <Filter>소스 파일\PlayGame\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>소스 파일\PlayGame\Game\GObject\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
