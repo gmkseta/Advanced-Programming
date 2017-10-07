@@ -21,7 +21,7 @@ public:
 	void Destroy();
 
 	//포지션 x
-	float GetPosX() { return _center.x; }
+	float GetPosX() { return rectPos.left; }
 	//유저의 랙트 값
 	RECT_POINT* GetRect() { return &rectPos; }
 
@@ -37,10 +37,10 @@ public:
 	}
 
 private:
-	RECT_POINT		rectPos;
 	float			m_fAnimation;
 	float			m_fAnimationMaxPoint;
 	int				myBulletNum;
+	float			movX, movY;
 	
 
 };

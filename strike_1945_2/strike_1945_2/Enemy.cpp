@@ -15,8 +15,6 @@ void Enemy::inIt(Bitmap bmpImage, DigitalCanvas2D* my_canvas)
 {
 	_canvas = my_canvas;
 	
-	_center.x = rectPos.left;
-	_center.y = rectPos.bottom;
 	
 	arr = bmpImage.pixels;
 	width = bmpImage.ih.biWidth;
@@ -28,8 +26,7 @@ void Enemy::reRectPoint(float x, int pattern)
 {
 	rectPos.top = 70.0f + 4.2f;
 	rectPos.left = x - 2.5f;
-	rectPos.right = x + 2.5f;
-	rectPos.bottom = 70.0f;
+	calcRightTop();
 
 //	m_Pattern = pattern;
 

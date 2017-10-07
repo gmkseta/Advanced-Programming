@@ -107,5 +107,8 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>소스 파일\PlayGame\Game\GObject\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="gameObject.cpp">
+      <Filter>소스 파일\PlayGame\Game\GObject</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

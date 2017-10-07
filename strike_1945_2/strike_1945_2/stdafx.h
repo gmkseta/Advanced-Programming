@@ -32,20 +32,3 @@
 #include "gameObject.h"
 
 
-
-struct RECT_POINT
-{
-	float top;
-	float left;
-	float right;
-	float bottom;
-
-	RECT_POINT()
-	{
-		top = 0;
-		left = 0;
-		right = 0;
-		bottom = 0;
-	}
-
-};

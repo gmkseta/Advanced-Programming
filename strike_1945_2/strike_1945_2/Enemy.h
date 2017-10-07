@@ -17,7 +17,6 @@ public:
 	static unsigned int	EnemyTextureObject;
 
 private:
-	RECT_POINT		rectPos;
 	int				m_Pattern;
 	float			m_fAnimation;
 	float			m_fShotTime;

@@ -19,7 +19,5 @@ public:
 	static unsigned int	MissleTextureObject;
 	
 
-private:
-	RECT_POINT			rectPos;
 
 };

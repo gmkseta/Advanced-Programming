@@ -23,7 +23,9 @@ void User::Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas)
 	arr = bmpImage.pixels;
 	width = bmpImage.ih.biWidth;
 	height = bmpImage.ih.biHeight;
-	vec3 _center = vec3(0.0f, 0.0f, 0.0f);
+	movX = 0.0f;
+	movY = 0.0f;
+
 
 }
 
@@ -49,18 +51,18 @@ void User::Update(float delta)
 	
 	
 	//LEFT 버튼이 눌렸을 경우
-	if (_canvas->isKeyPressed(GLFW_KEY_LEFT))_center.x -= SPEED*delta;
+	if (_canvas->isKeyPressed(GLFW_KEY_LEFT))movX -= SPEED*delta;
 
-	if (_canvas->isKeyPressed(GLFW_KEY_RIGHT))_center.x += SPEED*delta;
+	if (_canvas->isKeyPressed(GLFW_KEY_RIGHT))movX += SPEED*delta;
 
-	if (_canvas->isKeyPressed(GLFW_KEY_DOWN))_center.y -= SPEED*delta;
+	if (_canvas->isKeyPressed(GLFW_KEY_DOWN))movY -= SPEED*delta;
 
-	if (_canvas->isKeyPressed(GLFW_KEY_UP))_center.y += SPEED*delta;
+	if (_canvas->isKeyPressed(GLFW_KEY_UP))movY += SPEED*delta;
 
 	
 	////이동할 수 있는 지역일 경우 SetPosition
-	if (CheckPosition(_center.x, _center.y)) 
-		SetPosition(_center.x, _center.y);
+	if (CheckPosition(movX, movY)) 
+		SetPosition(movX, movY);
 
 }
 
@@ -74,10 +76,10 @@ BOOL User::CheckPosition(float &x, float &y)
 
 void User::SetPosition(float &x, float &y)
 {
-	rectPos.top = y + (float)height/512;
 	rectPos.left = x + 0.0f;
-	rectPos.right = x + (float)width / 512;
 	rectPos.bottom = y + 0.0f;
+	calcRightTop();
+
 }
 
 

@@ -23,8 +23,6 @@ void Weapon::Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas) {
 	rectPos.left = x - (float)width / 1024;
 	rectPos.right = x + (float)width / 1024;
 	rectPos.bottom = y;
-	_center.x = rectPos.left;
-	_center.y = rectPos.bottom;
 	arr = bmpImage.pixels;
 	width = bmpImage.ih.biWidth;
 	height = bmpImage.ih.biHeight;
@@ -38,8 +36,6 @@ void Weapon::reRectPoint(float x, float y)
 	rectPos.right = x + (float)width / 1024;
 	rectPos.bottom = y;
 
-	_center.x = rectPos.left;
-	_center.y = rectPos.bottom;
 
 }
 
@@ -61,7 +57,6 @@ BOOL Weapon::Update(float delta)
 	{
 		rectPos.top += 2.0f * delta;
 		rectPos.bottom += 2.0f * delta;
-		_center.y = rectPos.bottom;
 		return TRUE;
 	}
 
