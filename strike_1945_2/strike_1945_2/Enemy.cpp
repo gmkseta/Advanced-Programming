@@ -11,21 +11,24 @@ Enemy::~Enemy(void)
 {
 	Destroy();
 }
-void Enemy::inIt(Bitmap bmpImage, DigitalCanvas2D* my_canvas)
+void Enemy::Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas)
 {
-	_canvas = my_canvas;
-	
-	
+	_canvas = my_canvas;	
 	arr = bmpImage.pixels;
 	width = bmpImage.ih.biWidth;
 	height = bmpImage.ih.biHeight;
+	x = 0.0f;
+	y = 0.5f-(float)height/512;
+	rectPos.left = x;
+	rectPos.bottom = y;
+	calcRightTop();
 
 }
 
 void Enemy::reRectPoint(float x, int pattern)
 {
-	rectPos.top = 70.0f + 4.2f;
-	rectPos.left = x - 2.5f;
+	//rectPos.top = 70.0f + 4.2f;
+	rectPos.left = x ;
 	calcRightTop();
 
 //	m_Pattern = pattern;
@@ -38,9 +41,10 @@ void Enemy::reRectPoint(float x, int pattern)
 BOOL Enemy::Draw()
 {
 	//영역밖을 벗어난 오브젝트는 랜더링하지 않는다.
-	if (rectPos.bottom > 75.0f || rectPos.right < -5.0f || rectPos.left > 65.0f || rectPos.top < -5.0f)
+	if (rectPos.bottom < -1.0f || rectPos.right > 1.0f || rectPos.left < -1.0f || rectPos.top > 1.0f)
 		return FALSE;
 
+	drawObject(*_canvas);
 	
 	return TRUE;
 }
@@ -49,10 +53,15 @@ BOOL Enemy::Update(float delta)
 {
 	//애니메이션
 
-	if (rectPos.bottom > 75.0f || rectPos.right < -5.0f || rectPos.left > 65.0f || rectPos.top < -5.0f)
+	if (rectPos.bottom < -1.0f || rectPos.right > 1.0f || rectPos.left < -1.0f || rectPos.top > 1.0f)
 		return FALSE;
 
 
+
+	rectPos.top -= 20.0 * delta;
+	rectPos.bottom -= 20.0 * delta;
+
+/*
 	switch (m_Pattern)
 	{
 	case 1:
@@ -67,7 +76,7 @@ BOOL Enemy::Update(float delta)
 
 		break;
 
-	}
+	}*/
 
 	return TRUE;
 }

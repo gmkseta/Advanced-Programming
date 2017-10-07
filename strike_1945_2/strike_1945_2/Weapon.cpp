@@ -19,10 +19,9 @@ void Weapon::Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas) {
 	float x = 0.0f;
 	float y = -1.5f;
 	
-	rectPos.top = y + (float)height / 512;
 	rectPos.left = x - (float)width / 1024;
-	rectPos.right = x + (float)width / 1024;
 	rectPos.bottom = y;
+	calcRightTop();
 	arr = bmpImage.pixels;
 	width = bmpImage.ih.biWidth;
 	height = bmpImage.ih.biHeight;

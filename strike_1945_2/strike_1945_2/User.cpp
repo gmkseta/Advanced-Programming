@@ -24,7 +24,7 @@ void User::Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas)
 	width = bmpImage.ih.biWidth;
 	height = bmpImage.ih.biHeight;
 	movX = 0.0f;
-	movY = 0.0f;
+	movY = -0.9999f;
 
 
 }

@@ -22,7 +22,7 @@ void GameBoard::Init()
 	LoadBmpImg("image/BigMap.bmp", _BACKGROUND);
 	LoadBmpImg("image/User_Plane.bmp", _USER);
 	LoadBmpImg("image/bullet.bmp", _MISSLE);
-	LoadBmpImg("image/MiniEnemy2.bmp", _ENEMY);
+	LoadBmpImg("image/Enemy1.bmp", _ENEMY);
 
 	
 	myUser->Init(bmpImage[_USER],_canvas);
@@ -32,13 +32,14 @@ void GameBoard::Init()
 		myBullets[i].Init(bmpImage[_MISSLE],_canvas);
 	}
 
-	//CEnemy::EnemyTextureObject = TexContainer[ENEMY];
-
+	for (int i = 0; i != MAXENEMY; i++) {
+		myEnemy[i].Init(bmpImage[_ENEMY], _canvas);
+	}
 }
 
 void GameBoard::Draw()
 {
-	glMatrixMode(GL_MODELVIEW); //매트릭스 연산을 쓰겠다.
+	//glMatrixMode(GL_MODELVIEW); //매트릭스 연산을 쓰겠다.
 	glLoadIdentity(); //매트릭스 연산 초기화
 
 	//맵 그리기
@@ -57,28 +58,28 @@ void GameBoard::Draw()
 	}
 
 	////적비행기
-	//for (int i = 0; i <MAXENEMY; i++)
-	//{
-	//	if (m_cEnemy[i].Draw())
-	//		m_vEnermyRect.push_back(m_cEnemy[i].GetRect());
-	//}
+	for (int i = 0; i <MAXENEMY; i++)
+	{
+		if (myEnemy[i].Draw())
+			m_vEnermyRect.push_back(myEnemy[i].GetRect());
+	}
 
 
 	/////////////////   충돌처리 ///////////////////////////
-	//for (int i = 0; i < (int)m_vMyMissleRect.size(); i++)
-	//{
-	//	for (int j = 0; j < (int)m_vEnermyRect.size(); j++)
-	//	{
-	//		if (Collision(m_vMyMissleRect[i], m_vEnermyRect[j]))
-	//		{
-	//			m_vMyMissleRect[i]->top = m_vMyMissleRect[i]->bottom = 100.0f;
-	//			m_vEnermyRect[j]->top = m_vEnermyRect[j]->bottom = 100.0f;
-	//		}
-	//	}
-	//}
+	for (int i = 0; i < (int)m_vMyMissleRect.size(); i++)
+	{
+		for (int j = 0; j < (int)m_vEnermyRect.size(); j++)
+		{
+			if (Collision(m_vMyMissleRect[i], m_vEnermyRect[j]))
+			{
+				m_vMyMissleRect[i]->top = m_vMyMissleRect[i]->bottom = 1.5f;
+				m_vEnermyRect[j]->top = m_vEnermyRect[j]->bottom = 1.5f;
+			}
+		}
+	}
 
-	//m_vMyMissleRect.clear();
-	//m_vEnermyRect.clear();
+	m_vMyMissleRect.clear();
+	m_vEnermyRect.clear();
 	///////////////////////////////////////////////////////////
 
 
@@ -150,12 +151,12 @@ void GameBoard::Destroy()
 {
 }
 //
-//BOOL CGameScreen::Collision(FRECT *r1, FRECT*r2)
-//{
-//	if (r1->left > r2->right) return FALSE;
-//	if (r1->top < r2->bottom) return FALSE;
-//	if (r1->right < r2->left) return FALSE;
-//	if (r1->bottom > r2->top) return FALSE;
-//
-//	return TRUE;
-//}
+BOOL GameBoard::Collision(RECT_POINT *r1, RECT_POINT*r2)
+{
+	if (r1->left > r2->right) return FALSE;
+	if (r1->top < r2->bottom) return FALSE;
+	if (r1->right < r2->left) return FALSE;
+	if (r1->bottom > r2->top) return FALSE;
+
+	return TRUE;
+}

@@ -6,7 +6,7 @@ public:
 	Enemy(void);
 	~Enemy(void);
 
-	void inIt(Bitmap bmpImage, DigitalCanvas2D* my_canvas);
+	void Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas);
 	void reRectPoint(float x, int pattern);
 	BOOL Draw();
 	BOOL Update(float delta);

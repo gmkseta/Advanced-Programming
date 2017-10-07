@@ -9,6 +9,7 @@
 #include "User.h"
 #include "Weapon.h"
 #include "Map.h"
+#include "Enemy.h"
 enum IMG { _BACKGROUND, _USER, _MISSLE, _ENEMY };
 
 #define MAXENEMY 20
@@ -30,9 +31,9 @@ private:
 	User		*myUser;
 	Map			*myMap;
 	Weapon		myBullets[MAXSHOT];
+	Enemy		myEnemy[MAXENEMY];
 
 	int			EnemyIdx;
-	//CEnemy		m_cEnemy[MAXENEMY];
 
 	//충돌처리
 	std::vector<RECT_POINT*>			m_vMyMissleRect;
