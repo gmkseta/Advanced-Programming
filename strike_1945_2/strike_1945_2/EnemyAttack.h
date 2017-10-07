@@ -2,11 +2,11 @@
 
 #define USER_WIDTH 
 #define USER_HEIGHT
-class Weapon:public GameObject
+class EnemyAttack :public GameObject
 {
 public:
-	Weapon();
-	~Weapon(void);
+	EnemyAttack();
+	~EnemyAttack(void);
 
 	void Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas);
 	void reRectPoint(float x, float y);
@@ -16,8 +16,8 @@ public:
 
 	RECT_POINT* GetRect() { return &rectPos; }
 
-	
-	
+	static unsigned int	MissleTextureObject;
+
 
 
 };

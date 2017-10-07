@@ -40,6 +40,9 @@
     <Filter Include="소스 파일\PlayGame\Game\GObject\Enemy">
       <UniqueIdentifier>{28066725-6e28-4935-bf39-4081f39b38ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\PlayGame\Game\GObject\Enemy\EnemyAttack">
+      <UniqueIdentifier>{5f6e396c-6d12-4f4d-b01e-68cb2f253e20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -81,6 +84,9 @@
     <ClInclude Include="Enemy.h">
       <Filter>소스 파일\PlayGame\Game\GObject\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyAttack.h">
+      <Filter>소스 파일\PlayGame\Game\GObject\Enemy\EnemyAttack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -109,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="gameObject.cpp">
       <Filter>소스 파일\PlayGame\Game\GObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyAttack.cpp">
+      <Filter>소스 파일\PlayGame\Game\GObject\Enemy\EnemyAttack</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
