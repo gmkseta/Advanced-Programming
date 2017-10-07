@@ -61,3 +61,24 @@ void GameObject::drawMapLowQuality(DigitalCanvas2D _canvas, int q, float positio
 		}
 	}
 }
+
+void GameObject::drawEffect(DigitalCanvas2D _canvas, _RGBTRIPLE* arr,int x,RECT_POINT rectPos,int width) {
+	//for (int i = 0; i < 80; i++)
+	//{
+	//	for (int j = 70 * 8; j < 70 * 9; j++)
+	//	{
+	//		vec3 k = vec3(arr[i * 70 + j].rgbRed, arr[i * 70 + j].rgbGreen, arr[i * 70 + j].rgbBlue) / 255.0f;
+	//		if (k != RGBColors::black)// k.r != 0.0f&&k.g != 0.0f&&k.b != 0.0f)
+	//			_canvas.drawDot(k, vec3(rectPos.left  + (float)(j-x*70) / SCREEN_RATE, rectPos.bottom  + (float)i / SCREEN_RATE, 0.0));
+	//	}
+	//}
+	for (int i = 0; i < 80 - 1; i++)
+	{
+		for (int j = x*70; j < x*70+70; j++)
+		{
+			vec3 k = vec3(arr[i*width + j].rgbRed, arr[i*width + j].rgbGreen, arr[i*width + j].rgbBlue) / 255.0f;
+			if (k != RGBColors::black)// k.r != 0.0f&&k.g != 0.0f&&k.b != 0.0f)
+				_canvas.drawDot(k, vec3(rectPos.left  + (float)(j-x*70) / SCREEN_RATE, rectPos.bottom  + (float)i / SCREEN_RATE, 0.0));
+		}
+	}
+}

@@ -10,23 +10,29 @@ Enemy::~Enemy(void)
 {
 	Destroy();
 }
-void Enemy::Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas)
+void Enemy::Init(Bitmap bmpImage,Bitmap destoryImage, DigitalCanvas2D* my_canvas)
 {
 
 	srand((unsigned int)time(NULL));
 
 	_canvas = my_canvas;	
+	
 	arr = bmpImage.pixels;
 	width = bmpImage.ih.biWidth;
 	height = bmpImage.ih.biHeight;
 
+	Effect = destoryImage.pixels;
+	effectWidth = destoryImage.ih.biWidth;
+	effectHeight = destoryImage.ih.biHeight;
 
 	rectPos.left = (float)rand()/RAND_MAX;
 	rectPos.bottom = 1.0f+0.1f;
 	calcRightTop();
 
+	flag = FALSE;
 	
 
+	effectTime = 0.0f;
 
 }
 
@@ -36,18 +42,20 @@ void Enemy::reRectPoint()
 	myPattern = rand() % PATTERN_MAX + 1;
 
 
-	myMovTime = 0;
-	m_fAnimation = 0;
+	myMovTime = 0.0f;
 	m_fShotTime = 4.0f;
 }
 
 BOOL Enemy::Draw()
 {
-	//영역밖을 벗어난 오브젝트는 랜더링하지 않는다.
+	//영역 밖인거는 안그림
 	if (rectPos.bottom < -1.0f-(float)height/512 || rectPos.right > 1.0f || rectPos.left < -1.0f || rectPos.top > 1.0f+ (float)height/512)
 		return FALSE;
 
-	drawObject(*_canvas);
+	
+	if (flag == FALSE)drawObject(*_canvas);
+	else drawEffect(*_canvas,Effect, effectPattern,rectPos, effectWidth);
+		
 	
 	return TRUE;
 }
@@ -60,7 +68,7 @@ BOOL Enemy::Update(float delta)
 		return FALSE;
 
 	float downTime = ((float)rand() / RAND_MAX)*0.3f;// +0.3f;
-	printf("%2.3lf", downTime);
+    //printf("%2.3lf", downTime);
 	switch (myPattern)
 	{
 	case 1:
@@ -83,25 +91,11 @@ BOOL Enemy::Update(float delta)
 	{
 		myPattern=rand() % PATTERN_MAX + 1;
 		myMovTime = 0.0f;
-		
 	}
 
-/*
-	switch (m_Pattern)
-	{
-	case 1:
-	case 2:
+	if (flag == TRUE)
+		DestoryEffect(delta);
 
-		m_fAnimation += 8.0f * delta;
-		if (m_fAnimation > 17.0f)
-			m_fAnimation -= 17.0f;
-
-		rectPos.top -= 20.0 * delta;
-		rectPos.bottom -= 20.0 * delta;
-
-		break;
-
-	}*/
 
 	return TRUE;
 }
@@ -116,4 +110,40 @@ void Enemy::setPattern(int a)
 }
 int Enemy::getPattern() {
 	return myPattern;
+}
+
+void Enemy::DestoryEffect(float delta) {
+
+	float allTime = 10.0f;
+	effectTime += 15.0f*delta;
+	
+	if (effectTime > allTime / 16.0f*16.0f) { 
+		effectPattern = 16; 
+		flag = false;
+		effectTime = 0.0f;
+		rectPos.bottom = 1.5f;
+		calcRightTop();
+	}
+	else if (effectTime > allTime / 16.0f*15.0f)	effectPattern = 15;
+	else if (effectTime > allTime / 16.0f*14.0f)	effectPattern = 14;
+	else if (effectTime > allTime / 16.0f*13.0f)	effectPattern = 13;
+	else if (effectTime > allTime / 16.0f*12.0f)	effectPattern = 12;
+	else if (effectTime > allTime / 16.0f*11.0f)	effectPattern = 11;
+	else if (effectTime > allTime / 16.0f*10.0f)	effectPattern = 10;
+	else if (effectTime > allTime / 16.0f*9.0f)		effectPattern = 9;
+	else if (effectTime > allTime / 16.0f*8.0f)		effectPattern = 8;
+	else if (effectTime > allTime / 16.0f*7.0f)		effectPattern = 7;
+	else if (effectTime > allTime / 16.0f*6.0f)		effectPattern = 6;
+	else if (effectTime > allTime / 16.0f*5.0f)		effectPattern = 5;
+	else if (effectTime > allTime / 16.0f*4.0f)		effectPattern = 4;
+	else if (effectTime > allTime / 16.0f*3.0f)		effectPattern = 3;
+	else if (effectTime > allTime / 16.0f*2.0f)		effectPattern = 2;
+	else if (effectTime > allTime / 16.0f*1.0f)		effectPattern = 1;
+	else if (effectTime > allTime / 16.0f*0.0f)		effectPattern = 0;
+	
+
+
+
+
+
 }

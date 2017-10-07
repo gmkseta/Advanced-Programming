@@ -22,7 +22,7 @@ void GameBoard::Init()
 	LoadBmpImg("image/User_Plane.bmp", _USER);
 	LoadBmpImg("image/bullet.bmp", _MISSLE);
 	LoadBmpImg("image/Enemy1.bmp", _ENEMY);
-	LoadBmpImg("image/Detroy_Enemy.bmp", _DESTORY);
+	LoadBmpImg("image/Destory_Enemy.bmp", _DESTORY);
 
 	
 	myUser->Init(bmpImage[_USER],_canvas);
@@ -33,7 +33,7 @@ void GameBoard::Init()
 	}
 
 	for (int i = 0; i != MAXENEMY; i++) {
-		myEnemy[i].Init(bmpImage[_ENEMY], _canvas);
+		myEnemy[i].Init(bmpImage[_ENEMY],bmpImage[_DESTORY], _canvas);
 	}
 
 	EnemyNum = 0;
@@ -64,7 +64,7 @@ void GameBoard::Draw()
 	for (int i = 0; i <MAXENEMY; i++)
 	{
 		if (myEnemy[i].Draw()) {
-			m_vEnermyRect.push_back(myEnemy[i].GetRect());
+			m_vEnermyRect.push_back(&myEnemy[i]);
 		}
 		else {
 			myEnemy[i].setPattern(0);
@@ -78,11 +78,12 @@ void GameBoard::Draw()
 	{
 		for (int j = 0; j < (int)m_vEnermyRect.size(); j++)
 		{
-			if (Collision(m_vMyMissleRect[i], m_vEnermyRect[j]))
+			if (Collision(m_vMyMissleRect[i], &m_vEnermyRect[j]->rectPos))
 			{
 				m_vMyMissleRect[i]->top = m_vMyMissleRect[i]->bottom = 1.5f;
-				m_vEnermyRect[j]->top = m_vEnermyRect[j]->bottom = 1.5f;
-			}
+				m_vEnermyRect[j]->flag = TRUE;
+				//m_vEnermyRect[j]->rectPos.top = m_vEnermyRect[j]->rectPos.bottom = 1.5f;
+			} 
 		}
 	}
 
@@ -154,17 +155,18 @@ void GameBoard::Destroy()
 {
 }
 //
-BOOL GameBoard::Collision(RECT_POINT *r1, RECT_POINT*r2)
+BOOL GameBoard::Collision(RECT_POINT *rectPos1, RECT_POINT *rectPos2)
 {
-	if (r1->left > r2->right) return FALSE;
-	if (r1->top < r2->bottom) return FALSE;
-	if (r1->right < r2->left) return FALSE;
-	if (r1->bottom > r2->top) return FALSE;
+	if (rectPos1->left > rectPos2->right) return FALSE;
+	if (rectPos1->top < rectPos2->bottom) return FALSE;
+	if (rectPos1->right < rectPos2->left) return FALSE;
+	if (rectPos1->bottom > rectPos2->top) return FALSE;
 
-        	return TRUE;
+    return TRUE;
 }
 
-void GameBoard::DestoryEffect(float delta)
+void GameBoard::DestoryEffect(float delta,RECT_POINT r)
 {
+	timeGetTime();
 
 }

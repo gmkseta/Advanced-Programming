@@ -1,7 +1,5 @@
 #include "stdafx.h"
 #include "GameBoard.h"
-#include <Windows.h>
-#include <mmsystem.h>
 using namespace std;
 using namespace glm;
 

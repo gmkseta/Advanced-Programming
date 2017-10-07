@@ -40,7 +40,7 @@ public:
 	void drawObject(DigitalCanvas2D _canvas, float plusX = 0.0f, float plusY = 0.0f);
 	void drawObjectLowQuality(DigitalCanvas2D _canvas, int q);
 	void drawMapLowQuality(DigitalCanvas2D _canvas, int q, float position);
-
+	void drawEffect(DigitalCanvas2D _canvas,_RGBTRIPLE *arr ,int x, RECT_POINT rectPos,int width);
 
 
 };

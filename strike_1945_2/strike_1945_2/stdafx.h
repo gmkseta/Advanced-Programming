@@ -26,6 +26,8 @@
 #include <glm\common.hpp>
 #include <glm\gtc\constants.hpp>
 #include <glm\glm.hpp>
+#include <Windows.h>
+#include <mmsystem.h>
 #include "Bitmap.h"
 #include "DigitalCanvas2D.h"
 #include "RGBColors.h"

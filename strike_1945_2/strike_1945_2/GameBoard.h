@@ -25,8 +25,8 @@ public:
 	int ScreenUpdate(float delta);
 	void Destroy();
 
-	BOOL Collision(RECT_POINT *r1, RECT_POINT *r2);
-	void DestoryEffect(float delta);
+	BOOL Collision(RECT_POINT *rectPos1, RECT_POINT *rectPos2);
+	void DestoryEffect(float delta,RECT_POINT r);
 private:
 	User		*myUser;//내비행기
 	Map			*myMap;//배경
@@ -37,7 +37,7 @@ private:
 
 	//접촉 확인
 	std::vector<RECT_POINT*>			m_vMyMissleRect;
-	std::vector<RECT_POINT*>			m_vEnermyRect;
+	std::vector<Enemy*>			m_vEnermyRect;
 
 	//그리는 캔버스 주소값 받아올꺼.
 	DigitalCanvas2D* _canvas=nullptr;
