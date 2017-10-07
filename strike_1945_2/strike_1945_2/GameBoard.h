@@ -10,7 +10,7 @@
 #include "Weapon.h"
 #include "Map.h"
 #include "Enemy.h"
-enum IMG { _BACKGROUND, _USER, _MISSLE, _ENEMY };
+enum IMG { _BACKGROUND, _USER, _MISSLE, _ENEMY ,_DESTORY};
 
 #define MAXENEMY 20
 
@@ -26,19 +26,20 @@ public:
 	void Destroy();
 
 	BOOL Collision(RECT_POINT *r1, RECT_POINT *r2);
-
+	void DestoryEffect(float delta);
 private:
-	User		*myUser;
-	Map			*myMap;
-	Weapon		myBullets[MAXSHOT];
-	Enemy		myEnemy[MAXENEMY];
+	User		*myUser;//내비행기
+	Map			*myMap;//배경
+	Weapon		myBullets[MAXSHOT];//내총알
+	Enemy		myEnemy[MAXENEMY];//적
 
-	int			EnemyNum;
+	int			EnemyNum;//현재 적들의 수
 
-	//충돌처리
+	//접촉 확인
 	std::vector<RECT_POINT*>			m_vMyMissleRect;
 	std::vector<RECT_POINT*>			m_vEnermyRect;
 
+	//그리는 캔버스 주소값 받아올꺼.
 	DigitalCanvas2D* _canvas=nullptr;
 
 };

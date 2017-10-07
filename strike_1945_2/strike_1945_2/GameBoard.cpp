@@ -18,12 +18,11 @@ GameBoard::~GameBoard(void)
 
 void GameBoard::Init()
 {
-
-	
 	LoadBmpImg("image/BigMap.bmp", _BACKGROUND);
 	LoadBmpImg("image/User_Plane.bmp", _USER);
 	LoadBmpImg("image/bullet.bmp", _MISSLE);
 	LoadBmpImg("image/Enemy1.bmp", _ENEMY);
+	LoadBmpImg("image/Detroy_Enemy.bmp", _DESTORY);
 
 	
 	myUser->Init(bmpImage[_USER],_canvas);
@@ -83,7 +82,6 @@ void GameBoard::Draw()
 			{
 				m_vMyMissleRect[i]->top = m_vMyMissleRect[i]->bottom = 1.5f;
 				m_vEnermyRect[j]->top = m_vEnermyRect[j]->bottom = 1.5f;
-
 			}
 		}
 	}
@@ -164,4 +162,9 @@ BOOL GameBoard::Collision(RECT_POINT *r1, RECT_POINT*r2)
 	if (r1->bottom > r2->top) return FALSE;
 
         	return TRUE;
+}
+
+void GameBoard::DestoryEffect(float delta)
+{
+
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#define IMG_NUM 10//이미지 갯수
 
 class Cscreen
 {
@@ -12,7 +13,7 @@ protected:
 
 public:
 
-	Bitmap bmpImage[10];
+	Bitmap bmpImage[IMG_NUM];
 
 	Cscreen(void);
 	virtual ~Cscreen(void);
