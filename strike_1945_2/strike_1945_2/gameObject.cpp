@@ -6,7 +6,20 @@ void GameObject::calcRightTop()
 	rectPos.right = rectPos.left + (float)width / SCREEN_RATE;
 	rectPos.top = rectPos.bottom + (float)height / SCREEN_RATE;
 }
-
+void GameObject::calcRect(float x, float y,int ver)
+{
+	if (ver == 0) 
+	{
+		rectPos.left += x;
+		rectPos.bottom += y;
+	}
+	else if (ver == 1)
+	{
+		rectPos.left = x;
+		rectPos.bottom = y;
+	}
+	calcRightTop();
+}
 void GameObject::drawObject(DigitalCanvas2D _canvas, float plusX , float plusY )
 {
 	for (int i = 0; i < height - 1; i++)

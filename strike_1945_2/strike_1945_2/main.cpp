@@ -8,7 +8,6 @@ using namespace glm;
 //시간관련 변수
 float lastTime = (float)timeGetTime();
 float timeDelta = 0.0f;
-
 //프레임 제어
 int timeCount = 0;
 DWORD _ctime;

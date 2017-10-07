@@ -33,7 +33,7 @@ private:
 	Weapon		myBullets[MAXSHOT];
 	Enemy		myEnemy[MAXENEMY];
 
-	int			EnemyIdx;
+	int			EnemyNum;
 
 	//충돌처리
 	std::vector<RECT_POINT*>			m_vMyMissleRect;

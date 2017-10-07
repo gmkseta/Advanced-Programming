@@ -2,7 +2,7 @@
 #include "Weapon.h"
 
 
-unsigned int Weapon::MissleTextureObject = 0;
+
 
 Weapon::Weapon()
 {

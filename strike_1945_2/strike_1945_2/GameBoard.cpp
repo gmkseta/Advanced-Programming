@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameBoard.h"
+BOOL Enemy::isMax = FALSE;
 
 GameBoard::GameBoard(DigitalCanvas2D* my_canvas)
 {
@@ -35,6 +36,9 @@ void GameBoard::Init()
 	for (int i = 0; i != MAXENEMY; i++) {
 		myEnemy[i].Init(bmpImage[_ENEMY], _canvas);
 	}
+
+	EnemyNum = 0;
+	
 }
 
 void GameBoard::Draw()
@@ -42,7 +46,6 @@ void GameBoard::Draw()
 	//glMatrixMode(GL_MODELVIEW); //매트릭스 연산을 쓰겠다.
 	glLoadIdentity(); //매트릭스 연산 초기화
 
-	//맵 그리기
 	myMap->Draw();
 
 	//유저 그리기
@@ -57,11 +60,17 @@ void GameBoard::Draw()
 
 	}
 
+	Enemy::isMax = TRUE;
 	////적비행기
 	for (int i = 0; i <MAXENEMY; i++)
 	{
-		if (myEnemy[i].Draw())
+		if (myEnemy[i].Draw()) {
 			m_vEnermyRect.push_back(myEnemy[i].GetRect());
+		}
+		else {
+			myEnemy[i].setPattern(0);
+			Enemy::isMax = FALSE;
+		}
 	}
 
 
@@ -74,6 +83,7 @@ void GameBoard::Draw()
 			{
 				m_vMyMissleRect[i]->top = m_vMyMissleRect[i]->bottom = 1.5f;
 				m_vEnermyRect[j]->top = m_vEnermyRect[j]->bottom = 1.5f;
+
 			}
 		}
 	}
@@ -98,7 +108,7 @@ int GameBoard::ScreenUpdate(float delta)
 		{
 			int ShotNumber = myUser->GetBulletNum();
 			myBullets[ShotNumber].reRectPoint(myUser->GetPosX() + (float) myUser->width / 1024, myUser->GetRect()->top);
-			MissleDelay = 0.10f;
+			MissleDelay = 0.06f;
 		}
 	}
 
@@ -107,25 +117,20 @@ int GameBoard::ScreenUpdate(float delta)
 
 	////////////////////// 적비행기 관련 동작 //////////////////////
 	//static int storyIdx = 0;
-	//static float EnemyDelay = 0;
+	static float EnemyDelay = 0;
 
-	//if (EnemyDelay <= 0)
-	//{
-	//	if (m_vStory[storyIdx] && m_vStory.size() != 0)
-	//	{
-	//		m_cEnemy[EnemyIdx].Init(m_vStory[storyIdx]->x, m_vStory[storyIdx]->patten);
-	//		EnemyIdx = ++EnemyIdx % MAXENEMY;
-	//		EnemyDelay = 0.50f;
-	//	}
-	//	else
-	//	{
-	//		EnemyDelay = 3.00f;
-	//	}
+	if (EnemyDelay <= 0)
+	{
+		if (Enemy::isMax != TRUE) {
+			myEnemy[EnemyNum].reRectPoint();
+			EnemyNum = ++EnemyNum % MAXENEMY;
+			EnemyDelay = 0.3f;
+		}
+		else { EnemyDelay = 3.00f; }
+		
+	}
 
-	//	storyIdx = ++storyIdx % (int)m_vStory.size();
-	//}
-
-	//if (EnemyDelay > 0) EnemyDelay -= delta;
+	if (EnemyDelay > 0) EnemyDelay -= delta;
 
 	////////////////////////////////////////////////////////////////
 
@@ -141,8 +146,8 @@ int GameBoard::ScreenUpdate(float delta)
 		myBullets[i].Update(delta);
 
 	////적비행기 Update
-	//for (int i = 0; i <MAXENEMY; i++)
-	//	m_cEnemy[i].Update(delta);
+	for (int i = 0; i <MAXENEMY; i++)
+		myEnemy[i].Update(delta);
 
 	return 0;
 }
@@ -158,5 +163,5 @@ BOOL GameBoard::Collision(RECT_POINT *r1, RECT_POINT*r2)
 	if (r1->right < r2->left) return FALSE;
 	if (r1->bottom > r2->top) return FALSE;
 
-	return TRUE;
+        	return TRUE;
 }

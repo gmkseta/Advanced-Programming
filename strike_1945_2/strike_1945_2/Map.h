@@ -1,5 +1,5 @@
 #pragma once
-#define QUALITY 8
+#define QUALITY 10
 class Map:GameObject
 {
 public:
