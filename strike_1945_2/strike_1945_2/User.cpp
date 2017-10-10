@@ -1,13 +1,11 @@
 #include "stdafx.h"
 #include "User.h"
 
-User::User(void) 
+User::User() 
 {}
 
-User::~User(void)
-{
-	//Destroy();
-}
+User::~User()
+{}
 
 void User::Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas)
 {
@@ -16,9 +14,7 @@ void User::Init(Bitmap bmpImage, DigitalCanvas2D* my_canvas)
 	_canvas = my_canvas;
 
 	//초기화
-	m_fAnimation = 0;
 	myBulletNum = 0;
-	m_fAnimationMaxPoint = 3;
 
 	arr = bmpImage.pixels;
 	width = bmpImage.ih.biWidth;
@@ -36,18 +32,6 @@ void User::Draw()
 
 void User::Update(float delta)
 {
-	//애니메이션
-	//m_fAnimation += 32.0f * delta;
-
-	//주인공 애니메이션의 종류는 3가지 3을 초과시 다시 처음부터 진행
-	//if (m_fAnimation > m_fAnimationMaxPoint)
-	//	m_fAnimation -= m_fAnimationMaxPoint;
-
-	//BOOL Up = ((GetAsyncKeyState(VK_UP) & 0x8000) == 0x8000);
-	//BOOL Down = ((GetAsyncKeyState(VK_DOWN) & 0x8000) == 0x8000);
-	//BOOL Left = ((GetAsyncKeyState(VK_LEFT) & 0x8000) == 0x8000);
-	//BOOL Right = ((GetAsyncKeyState(VK_RIGHT) & 0x8000) == 0x8000);
-
 	
 	
 	//LEFT 버튼이 눌렸을 경우
@@ -68,8 +52,8 @@ void User::Update(float delta)
 
 BOOL User::CheckPosition(float &x, float &y)
 {
-	if (x + (float)width/512 >= 1.0f || x <= -1.0f) x = rectPos.left;
-	if (y + (float)height/512 >= 1.0f || y <= -1.0f) y = rectPos.bottom;
+	if (x + (float)width/ SCREEN_RATE >= 1.0f || x <= -1.0f) x = rectPos.left;
+	if (y + (float)height/ SCREEN_RATE >= 1.0f || y <= -1.0f) y = rectPos.bottom;
 
 	return TRUE;
 }
@@ -82,8 +66,3 @@ void User::SetPosition(float &x, float &y)
 
 }
 
-
-void User::Destroy()
-{
-
-}

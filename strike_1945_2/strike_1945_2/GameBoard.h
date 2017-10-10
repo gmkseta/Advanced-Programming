@@ -10,34 +10,35 @@
 #include "Weapon.h"
 #include "Map.h"
 #include "Enemy.h"
-enum IMG { _BACKGROUND, _USER, _MISSLE, _ENEMY ,_DESTORY};
-
+#include "EnemyAttack.h"
+enum IMG { _BACKGROUND, _USER, _BULLETS, _ENEMY ,_DESTORY,_E_BULLETS,_GAMEOVER,_NUMBER,_SCORE};
 #define MAXENEMY 20
-
-class GameBoard : public Cscreen
+#define MAX_E_BULLETS 30
+class GameBoard : public Screen
 {
 public:
 	GameBoard(DigitalCanvas2D* my_canvas);
 	~GameBoard(void);
+	void Init();//초기화
+	void Draw();//화면 내에있을시 그려줌
+	int ScreenUpdate(float delta);//각각의 오브젝트들의 정보를 업데이트
+	
 
-	void Init();
-	void Draw();
-	int ScreenUpdate(float delta);
-	void Destroy();
-
-	BOOL Collision(RECT_POINT *rectPos1, RECT_POINT *rectPos2);
-	void DestoryEffect(float delta,RECT_POINT r);
+	BOOL Collision(RECT_POINT *rectPos1, RECT_POINT *rectPos2);//부딪혔는지 확인 
+	void DrawScore();//스코어 그려줌
 private:
 	User		*myUser;//내비행기
 	Map			*myMap;//배경
 	Weapon		myBullets[MAXSHOT];//내총알
 	Enemy		myEnemy[MAXENEMY];//적
-
-	int			EnemyNum;//현재 적들의 수
-
+	EnemyAttack enemyBullets[MAX_E_BULLETS];//적 총알	
+	int			enemyNum;//내 현재 적들의 수를 저장
+	BOOL		gameOver;//게임오버 했는지 안했는지 확인하는 변수
+	int			score;//점수
 	//접촉 확인
-	std::vector<RECT_POINT*>			m_vMyMissleRect;
-	std::vector<Enemy*>			m_vEnermyRect;
+	std::vector<RECT_POINT*>	myBulletsRect;
+	std::vector<Enemy*>			myEnemyRect;
+	std::vector<RECT_POINT*>	enemyBulletsRect;
 
 	//그리는 캔버스 주소값 받아올꺼.
 	DigitalCanvas2D* _canvas=nullptr;

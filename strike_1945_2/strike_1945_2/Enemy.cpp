@@ -2,14 +2,11 @@
 #include "Enemy.h"
 #include <cstdlib>
 
-Enemy::Enemy(void)
-{
-}
+Enemy::Enemy()
+{}
 
-Enemy::~Enemy(void)
-{
-	Destroy();
-}
+Enemy::~Enemy()
+{}
 void Enemy::Init(Bitmap bmpImage,Bitmap destoryImage, DigitalCanvas2D* my_canvas)
 {
 
@@ -38,24 +35,18 @@ void Enemy::Init(Bitmap bmpImage,Bitmap destoryImage, DigitalCanvas2D* my_canvas
 
 void Enemy::reRectPoint()
 {
-	calcRect(-1.0f+(float)2*rand()/RAND_MAX, 1.0f, 1);
+	calcRect(-0.8f+(float)(1.6f*rand()/RAND_MAX), 1.0f, 1);
 	myPattern = rand() % PATTERN_MAX + 1;
-
-
-	myMovTime = 0.0f;
-	m_fShotTime = 4.0f;
+	myMovTime = 0.0f;	
 }
 
 BOOL Enemy::Draw()
 {
-	//영역 밖인거는 안그림
-	if (rectPos.bottom < -1.0f-(float)height/512 || rectPos.right > 1.0f || rectPos.left < -1.0f || rectPos.top > 1.0f+ (float)height/512)
-		return FALSE;
+	//화면 밖이면 그냥 안그림
+	if (checkArea()==FALSE)return FALSE;
 
-	
-	if (flag == FALSE)drawObject(*_canvas);
-	else drawEffect(*_canvas,Effect, effectPattern,rectPos, effectWidth);
-		
+	if (flag == FALSE)drawObjectLowQuality(*_canvas, 3);//drawObject(*_canvas);
+	else drawEffect(*_canvas, Effect, effectPattern, rectPos);
 	
 	return TRUE;
 }
@@ -64,11 +55,11 @@ BOOL Enemy::Update(float delta)
 {
 	//애니메이션
 
-	if (rectPos.bottom < -1.0f - (float)height / 512 || rectPos.right > 1.0f || rectPos.left < -1.0f || rectPos.top > 1.0f + (float)height / 512)
+	if (checkArea()==FALSE)
 		return FALSE;
 
 	float downTime = ((float)rand() / RAND_MAX)*0.3f;// +0.3f;
-    //printf("%2.3lf", downTime);
+    //랜덤한 속도로 내려가게 하기위해
 	switch (myPattern)
 	{
 	case 1:
@@ -100,10 +91,6 @@ BOOL Enemy::Update(float delta)
 	return TRUE;
 }
 
-void Enemy::Destroy()
-{
-
-}
 void Enemy::setPattern(int a)
 {
 	myPattern = a;
