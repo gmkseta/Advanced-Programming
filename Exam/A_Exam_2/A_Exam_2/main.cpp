@@ -1,60 +1,65 @@
 #include <iostream>
 
+
 using namespace std;
 
 
 
-class PlayOverWatch
+
+class ov
 {
 public:
-	void print()
+	void pr()
 	{
-		cout << "pv" << endl;
+		cout << "o" << endl;
 	}
 };
-class PlayCiv
+class cv
 {
 public:
-	void print()
+	void pr()
 	{
 		cout << "c" << endl;
 	}
 };
 
+
 template <class T>
 class Student
 {
 public:
-	void (Student::*func_ptr)() = nullptr;
 	T f_game;
+	void(Student::*func_ptr)(void) = nullptr;
+
 public:
-	Student(string doing)
+	Student(string name)
 	{
-		if (doing == "study")
+		if (name == "study")
 			this->func_ptr = &Student::study;
-		else if (doing == "play")
+		else if (name == "play")
 			this->func_ptr = &Student::play;
-		else if (doing == "sleep")
+		else  if (name == "sleep")
 			this->func_ptr = &Student::sleep;
+
 	}
 	void study()
 	{
-		cout << "studing" << endl;
+		cout << "st" << endl;
 	}
 	void play()
 	{
-		cout << "ping" << endl;
-		f_game.print();
+		cout << "pl" << endl;
+		f_game.pr();
 	}
 	void sleep()
 	{
-		cout << "sleepg" << endl;
+		cout << "sl" << endl;
 	}
-	
-	void doSomething()
+	void doSomeThing()
 	{
 		if (func_ptr != nullptr)
 			(this->*func_ptr)();
+
 	}
 };
 
@@ -63,13 +68,24 @@ public:
 
 
 
-int main(void)
-{
-	Student<PlayCiv> a("play");
-	a.doSomething();
-	return 0;
 
+
+
+
+
+
+
+
+int main()
+{
+	Student<cv> a("play");
+	a.doSomeThing();
+	return 0;
 }
+
+
+
+
 
 
 
