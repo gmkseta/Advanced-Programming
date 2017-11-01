@@ -87,9 +87,9 @@ int main()
 		
 
 
-		key_command_binding[input_char]();
+	//	key_command_binding[input_char]();
 
-		key_command_bi[input_char]();
+		//key_command_bi[input_char]();
 
 		key_co[input_char]->doSomething();
 		// ㄴ void (*func_ptr)() = key_command_binding[input_char];
@@ -139,11 +139,6 @@ int main()
 		//map으로 for문 돌리면됨
 		
 		//기능 넣는거도 
-
-
-
-
-
 	}
 	return 0;
 
