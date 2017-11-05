@@ -1,2 +1,2 @@
-# visual_sim
-비쥬얼??!!!?!?!?
+#Advanced-Programming
+심프가을학기
