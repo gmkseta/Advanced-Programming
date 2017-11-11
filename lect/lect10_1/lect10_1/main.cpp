@@ -10,42 +10,33 @@ DigitalCanvas2D my_canvas("This is my digital canvas!", 1024, 768); // Canvas : 
 class Ball
 {
 public:
-	float center_x, center_y;
-	float vel_x, vel_y;
-	float acc_x, acc_y;
-	const float r=0.1f;
-	const float coef_res = 0.5f;
-	Ball(float x) {
-		center_x = x; center_y = -0.05f; vel_x = 1.0f; vel_y = 3.0f;
-		acc_x = 0.0f; acc_y = -9.8f;
+	vec2 center_;
+	vec2 fix_;
 
+	float angle = 0.0f;
+	float aVel = 0.0f;
+	float aAcc = 0.0f;
+	
+	const float r=0.1f;
+	
+	Ball(float x) {
+		center_ = vec2(x, 0.0f);
+		fix_ = center_ + vec2(0.0f, 0.5f);
 	}
 	void draw()
 	{
+		my_canvas.drawLine(RGBColors::black, center_, RGBColors::black, fix_);
 		my_canvas.beginTransformation();
-		my_canvas.translate(center_x,center_y);
+		my_canvas.translate(center_.x,center_.y);
 		my_canvas.drawFilledCircle(RGBColors::red,r, 16);
 		my_canvas.endTransformation();
 	}
 	void move(const float dt)
 	{
-		center_x += vel_x*dt;
-		center_y += vel_y*dt;
-		vel_x += acc_x*dt;
-		vel_y += acc_y*dt;
 	}
 
 	void collision()
 	{
-		if (center_y - r <= -0.4f&&vel_y<=0.0f)
-		{
-		//collision response
-			vel_y = -vel_y*coef_res;
-		}
-		if (center_x-2.0f*r>= 1.0f &&vel_x >= 0.0f)
-		{
-			vel_x = -vel_x*coef_res;
-		}
 	}
 };
 
