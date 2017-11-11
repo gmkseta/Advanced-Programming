@@ -5,6 +5,7 @@
 #include <timeapi.h>
 using namespace std;
 using namespace glm;
+const float g = -9.8f;
 
 DigitalCanvas2D my_canvas("This is my digital canvas!", 1024, 768); // Canvas : (-1.0, -1.0) x (1.0, 1.0)
 
@@ -19,10 +20,14 @@ public:
 	float aAcc = 0.0f;
 	
 	
-	const float r=0.1f;
+	const float r = 0.1f;
+	const float l = 0.5f;
+
 	Ball(float x) {
 		center_ = vec2(x, 0.0f);
-		fix_ = center_ + vec2(0.0f, 0.5f);
+		fix_ = center_ + vec2(0.0f, l);
+		
+
 	}
 	void draw()
 	{
@@ -34,6 +39,10 @@ public:
 	}
 	void move(const float dt)
 	{
+		aAcc = g*sin(angle);
+		aVel += aAcc;
+		aVel *= dt;
+		center_ =vec2(fix_.x-l*sin(angle), fix_.y - l*cos(angle));
 	}
 
 	void collision()
@@ -44,7 +53,7 @@ public:
 
 float lastTime = (float)timeGetTime();
 float timeDelta = 0.0f;
-void Update()
+void getDelta()
 {
 	float currentTime = (float)timeGetTime();//현재 시간을 저장
 	timeDelta = (currentTime - lastTime)*0.001f;
@@ -54,35 +63,31 @@ void Update()
 
 int main(void)
 {
-	//Ball my_ball;
-
-	float time = 0.0;
-	const float dt = 0.0003f;
-
-	const float coef_res = 0.5f;
-
+	
+	
 	vector<Ball*> ball_list;
 
 	for (int i = 0; i < 3; i++)
 	{
 		ball_list.push_back(new Ball(-0.1f*2*i));
 	}
-
-
+	
 
 	my_canvas.show([&]
 	{
 		
-		for (auto itr : ball_list)
+		if (my_canvas.isKeyPressed(GLFW_KEY_RIGHT))
 		{
-			itr->collision();
-			itr->move(dt);
-			itr->draw();
-
+			ball_list[0]->angle = 0.5f;
 		}
 
+		for (auto itr : ball_list)
+		{
+			itr->move(timeDelta);
+		}
 
-		time += 1 / 60.0;
+		
+		getDelta();
 	}
 	);
 
