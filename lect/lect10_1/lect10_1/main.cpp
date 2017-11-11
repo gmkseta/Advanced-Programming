@@ -56,7 +56,7 @@ public:
 
 void collision(Ball* bal_1, Ball* bal_2)
 {
-	if (glm::length(bal_1->center_ - bal_2->center_) <= bal_1->r + bal_2->r)
+	if (glm::length(bal_1->center_ - bal_2->center_) < bal_1->r + bal_2->r)
 	{
 		
 		if(bal_1->aVel-bal_2->aVel<0 && bal_1->center_.x - bal_2->center_.x <0 )
@@ -91,7 +91,7 @@ int main(void)
 
 	for (int i = 0; i < 4; i++)
 	{
-		ball_list.push_back(new Ball(-0.1f*2*i));
+		ball_list.push_back(new Ball(-0.3f+0.1f*2*i));
 	}
 
 	my_canvas.show([&]
@@ -114,9 +114,15 @@ int main(void)
 
 		if (my_canvas.isKeyPressed(GLFW_KEY_RIGHT))
 		{
-			ball_list[0]->angle = -0.5f;
-			ball_list[0]->hold();
+			ball_list[ball_list.size() - 1]->angle = -0.5f;
+			ball_list[ball_list.size() - 1]->hold();
+			if (my_canvas.isKeyPressed(GLFW_KEY_2))
+			{
+				ball_list[ball_list.size() - 2]->angle = -0.5f;
+				ball_list[ball_list.size() - 2]->hold();
+			}
 		}
+		
 		
 		getDelta();
 		
