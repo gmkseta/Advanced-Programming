@@ -39,17 +39,39 @@ public:
 	}
 	void move(const float dt)
 	{
+
 		aAcc = g*sin(angle);
 		aVel += aAcc;
-		aVel *= dt;
+		angle += aVel*dt*0.001f;
 		center_ =vec2(fix_.x-l*sin(angle), fix_.y - l*cos(angle));
 	}
-
-	void collision()
+	void hold()
 	{
+		aAcc = 0.0f;
+		aVel = 0.0f;
+		center_ = vec2(fix_.x - l*sin(angle), fix_.y - l*cos(angle));
 	}
+	
 };
 
+void collision(Ball* bal_1, Ball* bal_2)
+{
+	if (glm::length(bal_1->center_ - bal_2->center_) <= bal_1->r + bal_2->r)
+	{
+		
+		if(bal_1->aVel-bal_2->aVel<0 && bal_1->center_.x - bal_2->center_.x <0 )
+		{
+			bal_2->aVel = bal_1->aVel;
+			bal_1->aVel = 0.0f;			
+		}
+		else if (bal_1->aVel - bal_2->aVel > 0 && bal_1->center_.x - bal_2->center_.x > 0)
+		{
+			bal_2->aVel = bal_1->aVel;
+			bal_1->aVel = 0.0f;
+		}
+	}
+	
+}
 
 float lastTime = (float)timeGetTime();
 float timeDelta = 0.0f;
@@ -67,27 +89,37 @@ int main(void)
 	
 	vector<Ball*> ball_list;
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		ball_list.push_back(new Ball(-0.1f*2*i));
 	}
-	
 
 	my_canvas.show([&]
 	{
 		
-		if (my_canvas.isKeyPressed(GLFW_KEY_RIGHT))
-		{
-			ball_list[0]->angle = 0.5f;
-		}
+		
 
 		for (auto itr : ball_list)
 		{
 			itr->move(timeDelta);
+			itr->draw();
+			for (auto itr2 : ball_list)
+			{
+				if (itr != itr2)
+					collision(itr, itr2);
+			}
 		}
+		
 
+
+		if (my_canvas.isKeyPressed(GLFW_KEY_RIGHT))
+		{
+			ball_list[0]->angle = -0.5f;
+			ball_list[0]->hold();
+		}
 		
 		getDelta();
+		
 	}
 	);
 
