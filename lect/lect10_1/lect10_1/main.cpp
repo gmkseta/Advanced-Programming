@@ -2,6 +2,7 @@
 #include "RGBColors.h"
 #include <iostream>
 #include <vector>
+#include <timeapi.h>
 using namespace std;
 using namespace glm;
 
@@ -17,8 +18,8 @@ public:
 	float aVel = 0.0f;
 	float aAcc = 0.0f;
 	
-	const float r=0.1f;
 	
+	const float r=0.1f;
 	Ball(float x) {
 		center_ = vec2(x, 0.0f);
 		fix_ = center_ + vec2(0.0f, 0.5f);
@@ -40,39 +41,38 @@ public:
 	}
 };
 
+
+float lastTime = (float)timeGetTime();
+float timeDelta = 0.0f;
+void Update()
+{
+	float currentTime = (float)timeGetTime();//현재 시간을 저장
+	timeDelta = (currentTime - lastTime)*0.001f;
+	//현재 시간과 마지막으로 저장햇던 시간의 차이로 델타 타임을 구함
+	lastTime = currentTime;
+}
+
 int main(void)
 {
 	//Ball my_ball;
 
 	float time = 0.0;
 	const float dt = 0.0003f;
-	float r = 0.10;
+
 	const float coef_res = 0.5f;
 
 	vector<Ball*> ball_list;
 
 	for (int i = 0; i < 3; i++)
 	{
-		ball_list.push_back(new Ball(-0.3f*i));
+		ball_list.push_back(new Ball(-0.1f*2*i));
 	}
 
 
 
 	my_canvas.show([&]
 	{
-		// update
-
-		//collision detection between ball and ground
-		//if (my_ball.center_y - r <= -0.4f&&my_ball.vel_y<=0.0f)
-		//{
-			//collision response
-		//	my_ball.vel_y = -my_ball.vel_y*coef_res;
-		//}
-		// move tank
-		//if (my_canvas.isKeyPressed(GLFW_KEY_SPACE)) {}
-		//1st order Euler integration
-		//my_ball.move(dt);
-		//my_ball.draw();
+		
 		for (auto itr : ball_list)
 		{
 			itr->collision();
@@ -81,10 +81,6 @@ int main(void)
 
 		}
 
-		my_canvas.beginTransformation();
-		my_canvas.translate(0.0f, -0.9);
-		my_canvas.drawFilledBox(RGBColors::green, 10, 1.0);
-		my_canvas.endTransformation();
 
 		time += 1 / 60.0;
 	}
