@@ -58,7 +58,7 @@ void collision(Ball* bal_1, Ball* bal_2)
 {
 	if (glm::length(bal_1->center_ - bal_2->center_) < bal_1->r + bal_2->r)
 	{
-		
+	
 		if(bal_1->aVel-bal_2->aVel<0 && bal_1->center_.x - bal_2->center_.x <0 )
 		{
 			bal_2->aVel = bal_1->aVel;
@@ -96,9 +96,6 @@ int main(void)
 
 	my_canvas.show([&]
 	{
-		
-		
-
 		for (auto itr : ball_list)
 		{
 			itr->move(timeDelta);
@@ -109,9 +106,6 @@ int main(void)
 					collision(itr, itr2);
 			}
 		}
-		
-
-
 		if (my_canvas.isKeyPressed(GLFW_KEY_RIGHT))
 		{
 			ball_list[ball_list.size() - 1]->angle = -0.5f;
