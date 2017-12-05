@@ -88,6 +88,17 @@ public:
 	Agent()
 		:i_(0), j_(0), reward_(0.0)
 	{}
+	void move(int i, int j)
+	{
+		i_ = i;
+		j_ = j;
+	}
+	void reset()
+	{
+		i_ = 0;
+		j_ = 0;
+		reward_ = 0;
+	}
 };
 
 
@@ -132,18 +143,18 @@ void grid_world1()
 		if (world.isInside(i, j) == true)//move robot if avaiable
 		{
 			//move agent // state를 업뎃 해주고 
-			my_agent.i_ = i;
-			my_agent.j_ = j;
-
-			//my_agent.reward_
+			my_agent.move(i, j);
+			
 			//update reward(r_t) rt계산 바꾸고
+			my_agent.reward_ -= 0.01;
+
 			//update q values of previous cell(q_t) qt계산해서 바꾸고
-			world.getCell(i_old, j_old).q_[action] = world.getCell(i, j).reward_ + world.getCell(i, j).getMaxQ();
+			world.getCell(i_old, j_old).q_[action] = world.getCell(i, j).reward_ + world.getCell(i, j).getMaxQ()+my_agent.reward_;
 
 			//reset if agent is in final cells 만약  파이널에 도달했으면 리셋후 훈련시작
 			if ((i == 2 && j == 1) || (i == 2 && j == 0))
 			{
-				my_agent.i_ = 0; my_agent.j_ = 0; my_agent.reward_ = 0.0;
+				my_agent.reset();
 			}
 		}
 		else //만약 벗어난다면?
@@ -175,8 +186,8 @@ void grid_world2()
 	double alpha = 0.5;
 	double gamma = 0.9;
 
-	point pos_reward[2] = { 5, 0, 5, 3 };
-	point nav_reward[3] = { 1, 1, 2, 1 ,3, 1 };
+	point pos_reward[1] = { 5, 3 };
+	point nav_reward[4] = { 5, 0,1, 1, 2, 1 ,3, 1 };
 
 
 	for (int j = 0; j < world_res_j; j++)
@@ -219,38 +230,39 @@ void grid_world2()
 		if (world.isInside(i, j) == true)//move robot if avaiable
 		{
 			//move agent // state를 업뎃 해주고 
-			my_agent.i_ = i;
-			my_agent.j_ = j;
+			my_agent.move(i, j);
 
-			//my_agent.reward_
+			
 			//update reward(r_t) rt계산 바꾸고
+			my_agent.reward_ -= 0.001;
+
 			//update q values of previous cell(q_t) qt계산해서 바꾸고
-			world.getCell(i_old, j_old).q_[action] += alpha*(world.getCell(i, j).reward_ + gamma*world.getCell(i, j).getMaxQ() - world.getCell(i_old, j_old).q_[action]);
+			world.getCell(i_old, j_old).q_[action] +=
+				alpha*(
+					world.getCell(i, j).reward_
+					+ gamma*world.getCell(i, j).getMaxQ() + my_agent.reward_
+					- world.getCell(i_old, j_old).q_[action]
+					+ my_agent.reward_
+					);
 
 			//reset if agent is in final cells 만약  파이널에 도달했으면 리셋후 훈련시작
 			for (auto itr : pos_reward)
 			{
 				if (itr.x == i && itr.y == j)
-				{
-					my_agent.i_ = 0; my_agent.j_ = 0; my_agent.reward_ = 0.0;
-				}
+					my_agent.reset();
 			}
 			for (auto itr : nav_reward)
 			{
 				if (itr.x == i && itr.y == j)
-				{
-					my_agent.i_ = 0; my_agent.j_ = 0; my_agent.reward_ = 0.0;
-				}
+					my_agent.reset();
 			}
 			
 		}
 		else //만약 벗어난다면?
 		{
 			world.getCell(i_old, j_old).q_[action] = -0.1;
-			// you may give negative reward (penalty) to agent.
 		}
-		//std::cout << "Agent status " << my_agent.i_ << " " << my_agent.j_ <<std::endl;
-		//std::cout << "action " << action << std::endl;
+		
 
 	}
 	world.print();
