@@ -5,75 +5,70 @@ template<class T>
 class VectorND
 {
 public:
-	T *vec;
-	int n;
-	VectorND(int _n):n(_n)
+	int size;
+	T *value;
+
+	VectorND(int _n):size(_n)
 	{
-		vec = new T[_n];
-		for (int i = 0; i < n; i++)
-			vec[i] = 0.0f;
+		value = new T[_n];
+		for (int i = 0; i < size; i++)
+			value[i] = T();
 	}
 	VectorND() {}
 	void init(int _n)
 	{
-		n = _n;
-		vec = new T[_n];
-		for (int i = 0; i < n; i++)
-			vec[i] = 0.0f;
+		size = _n;
+		value = new T[_n];
+		for (int i = 0; i < size; i++)
+			value[i] = T();
 	}
-	void assignValue(int x, float v)
+	void assignValue(int x, T v)
 	{
-		vec[x] = v;
+		value[x] = v;
 	}
-	T getValue(int x)
+	T getValue(int x) const
 	{
-		return vec[x];
-	}
-
-
-	
+		return value[x];
+	}	
 };
 
 template<class T>
-std::ostream& operator<<(std::ostream& strm, const VectorND<T>& a)
+std::ostream& operator<<(std::ostream& strm, const VectorND<T>& vec)
 {
-	for (int i = 0; i < a.n; i++)
+	for (int i = 0; i < vec.size; i++)
 	{
-		strm << a.vec[i] << ' ';
+		strm << vec.getValue(i) << ' ';
 	}
-
 	return strm;
 }
-
-
 
 template<class T>
 class MatrixMN
 {
 public:
-	VectorND<T> *vec;
+	VectorND<T> *value;
 	int x_length, y_length;//
 	//행 열로 들오면
 	MatrixMN(int x_l,int y_l):x_length(x_l),y_length(y_l)
 	{
-		vec = new VectorND<T>[y_length];
+		value = new VectorND<T>[y_length];
 		for (int i = 0; i < y_length; i++)
-			vec[i].init(x_length);
+			value[i].init(x_length);
 	}
 
 	//
 	void assgnValue(int x,int y, float v)
 	{
-		vec[y].assignValue(x, v);// = v;
+		value[y].assignValue(x, v);// = v;
 	}
-	T getValue(int x,int y)
+	T getValue(int x,int y) const
 	{
-		return vec[y].getValue(x);
+		return value[y].getValue(x);
 	}
 
 	VectorND<T> operator*(const VectorND<T>& ve)
 	{
-		if (ve.n != y_length)
+		if (ve.size != y_length)
 		{
 			std::cout << "계산 할 수 없는 행렬의 크기 입니다" << std::endl;
 		}
@@ -85,7 +80,7 @@ public:
 				T sum = T();
 				for (int y = 0; y < y_length; y++)
 				{
-					sum += ve.vec[y] * this->getValue(x,y);
+					sum += ve.value[y] * this->getValue(x,y);
 				}
 				result.assignValue(x, sum);
 			}
@@ -96,14 +91,14 @@ public:
 	
 };
 
-template <class T>
-std::ostream& operator<<(std::ostream& strm,const MatrixMN<T>& a)
-{
-	for (int i = 0; i < a.y_length; i++)
-	{
-		strm << a.vec[i] << std::endl;
-	}
 
+template <class T>
+std::ostream& operator<<(std::ostream& strm,const MatrixMN<T>& mat)
+{
+	for (int i = 0; i < mat.y_length; i++)
+	{
+		strm <<mat.value[i]<< std::endl;
+	}
 	return strm;
 }
 
@@ -144,7 +139,8 @@ int main(void)
 
 	VectorND<float> resu = mul_mat*mul_vec;
 
-	cout << resu << endl;
+	cout << my_vec << endl;
+	cout << my_mat << endl;
 
 	return 0;
 }
