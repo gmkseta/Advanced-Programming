@@ -1,146 +1,120 @@
 #include <iostream>
-
-
-template<class T>
+#include <iomanip>
+using namespace std;
+template <class T>
 class VectorND
 {
 public:
+	T* value;
 	int size;
-	T *value;
 
-	VectorND(int _n):size(_n)
+	VectorND(int n) :size(n)
 	{
-		value = new T[_n];
+		value = new T[size];
 		for (int i = 0; i < size; i++)
 			value[i] = T();
 	}
 	VectorND() {}
-	void init(int _n)
+	void init(int n)
 	{
-		size = _n;
-		value = new T[_n];
+		size = n;
+		value = new T[size];
 		for (int i = 0; i < size; i++)
 			value[i] = T();
 	}
+
 	void assignValue(int x, T v)
 	{
 		value[x] = v;
 	}
-	T getValue(int x) const
+	T getValue(int x)
 	{
 		return value[x];
-	}	
-};
-
-template<class T>
-std::ostream& operator<<(std::ostream& strm, const VectorND<T>& vec)
-{
-	for (int i = 0; i < vec.size; i++)
-	{
-		strm << vec.getValue(i) << ' ';
 	}
-	return strm;
-}
+
+};
 
 template<class T>
 class MatrixMN
 {
 public:
-	VectorND<T> *value;
-	int x_length, y_length;//
-	//행 열로 들오면
-	MatrixMN(int x_l,int y_l):x_length(x_l),y_length(y_l)
+	VectorND<T>* value;
+	int x_l, y_l;
+	MatrixMN(int x_length, int y_length) :x_l(x_length), y_l(y_length)
 	{
-		value = new VectorND<T>[y_length];
-		for (int i = 0; i < y_length; i++)
-			value[i].init(x_length);
+		value = new VectorND<T>[y_l];
+
+		for (int i = 0; i < y_l; i++)
+		{
+			value[i].init(x_l);
+		}
 	}
 
-	//
-	void assgnValue(int x,int y, float v)
+	void assignValue(int x, int y, T v)
 	{
-		value[y].assignValue(x, v);// = v;
+		value[y].assignValue(x, v);
 	}
-	T getValue(int x,int y) const
+	T getValue(int x, int y)
 	{
 		return value[y].getValue(x);
 	}
 
-	VectorND<T> operator*(const VectorND<T>& ve)
+	VectorND<T> operator*(VectorND<T> vec)
 	{
-		if (ve.size != y_length)
-		{
-			std::cout << "계산 할 수 없는 행렬의 크기 입니다" << std::endl;
-		}
-		else
-		{
-			VectorND<T>result(x_length);
-			for (int x = 0; x < x_length; x++)
-			{
-				T sum = T();
-				for (int y = 0; y < y_length; y++)
-				{
-					sum += ve.value[y] * this->getValue(x,y);
-				}
-				result.assignValue(x, sum);
-			}
-			return result;
-		}
-	}
+		//x*y행렬 곱하기 y*1 은 x*1로 나오는 vec임 .
+		VectorND<T> ret_vec(x_l);
 
-	
+		for (int x = 0; x < x_l; x++)
+		{
+			T sum = T();
+			for (int y = 0; y < y_l; y++)
+				sum += vec.getValue(y)*value[y].getValue(x);
+			ret_vec.assignValue(x, sum);
+		}
+		return ret_vec;
+
+	}
 };
 
-
-template <class T>
-std::ostream& operator<<(std::ostream& strm,const MatrixMN<T>& mat)
+template<class T>
+ostream& operator<<(ostream& strm, VectorND<T> vec)
 {
-	for (int i = 0; i < mat.y_length; i++)
+	for (int i = 0; i < vec.size; i++)
 	{
-		strm <<mat.value[i]<< std::endl;
+		strm << setw(10) << vec.getValue(i);
 	}
+	strm << endl;
 	return strm;
 }
 
-
-
-
-
-
-int main(void)
+template<class T>
+ostream& operator<<(ostream& strm, MatrixMN<T> mat)
 {
-	using namespace std;;
-	VectorND<float> my_vec(10);
-	my_vec.assignValue(3, 10.1f);
-	cout << my_vec.getValue(3)<<endl;
-
-	MatrixMN<float> my_mat(15, 10);
-	my_mat.assgnValue(4, 5, 3.14f);
-	cout << my_mat.getValue(4, 5) << endl;
-
-	cout << "ㅡㅡㅡㅡMulㅡㅡㅡㅡ"<<endl;
-
-
-	VectorND<float> mul_vec(20);
-	MatrixMN<float> mul_mat(15, 20);
-
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < mat.y_l; i++)
 	{
-		mul_vec.assignValue(i, 10.0f+(float)i*0.103f);
+		strm << mat.value[i];
+	}
+	strm << endl;
+	return strm;
+}
+
+int main()
+{
+	VectorND<float> my_vec(10);
+	MatrixMN<float> my_mat(15, 10);
+	for (int i = 0; i < 10; i++)
+	{
+		my_vec.assignValue(i, i*0.14f);
 		for (int j = 0; j < 15; j++)
-		{
-			mul_mat.assgnValue(j, i,  (float)i*0.103f + (float)j*0.131f);
-		}
+			my_mat.assignValue(j, i, i*0.4f + j*0.5f);
 	}
 
-	cout << mul_vec << endl;
 
-	cout << mul_mat << endl;
 
-	VectorND<float> resu = mul_mat*mul_vec;
-
-	cout << my_vec << endl;
 	cout << my_mat << endl;
-
+	cout << "X" << endl;
+	cout << my_vec << endl;
+	cout << "=" << endl;
+	cout << my_mat*my_vec << endl;
 	return 0;
 }
