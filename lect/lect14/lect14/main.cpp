@@ -11,6 +11,7 @@ class CellData
 public:
 	double q_[4] = { 0.0 ,0.0 ,0.0 ,0.0 };//up down left right
 	double reward_ = 0.0;
+	bool is_wall = false;
 	CellData() {}
 	double getMaxQ()
 	{
@@ -39,13 +40,15 @@ public:
 		if (i >= i_res_)return false;
 		if (j < 0)return false;
 		if (j >= j_res_)return false;
+		if (q_arr2d_[i + i_res_*j].is_wall == true)
+			return false;
 		return true;
 	}
 
 	void printSigned(const float& v)
 	{
-		if (v > 0.0f)printf("+%1.1f", v);
-		else if (v < 0.0f)printf("%1.1f", v);
+		if (v > 0.0f)printf("+%1.2f", v);
+		else if (v < 0.0f)printf("%1.2f", v);
 		else
 			printf(" 0.0");
 	}
@@ -57,22 +60,22 @@ public:
 			for (int i = 0; i < i_res_; i++)
 			{
 				CellData &cell = getCell(i, j);
-				printf("   "); printSigned(cell.q_[0]); printf("   ");
-				printf("   ");
+				printf("      "); printSigned(cell.q_[0]); printf("            ");
+				
 			}
 			printf("\n");
 			for (int i = 0; i < i_res_; i++)
 			{
 				CellData &cell = getCell(i, j);
-				printSigned(cell.q_[2]);	printf("  "); printSigned(cell.q_[3]);
-				printf("   ");
+				printSigned(cell.q_[2]);	printf("       "); printSigned(cell.q_[3]);
+				printf("      ");
 			}
 			printf("\n");
 			for (int i = 0; i < i_res_; i++)
 			{
 				CellData &cell = getCell(i, j);
-				printf("   "); printSigned(cell.q_[1]); printf("   ");
-				printf("   ");
+				printf("      "); printSigned(cell.q_[1]); printf("            ");
+				
 			}
 			printf("\n\n\n");
 		}
@@ -102,74 +105,6 @@ public:
 };
 
 
-void grid_world1()
-{
-	srand((unsigned int)time(NULL));
-	std::cout << "Hello, grid world!" << std::endl;
-	const int world_res_i = 3, world_res_j = 2;
-	GridWorld world(world_res_i, world_res_j);
-
-	for (int j = 0; j < world_res_j; j++)
-	{
-		for (int i = 0; i < world_res_i; i++)
-			world.getCell(i, j).reward_ = -0.1;
-	}
-
-	world.getCell(2, 1).reward_ = 1.0;
-	world.getCell(2, 0).reward_ = -1.0;
-
-	Agent my_agent;
-
-	for (int t = 0; t < 5000; t++)
-	{
-		const int action = rand() % 4;
-		int i = my_agent.i_, j = my_agent.j_;
-		int i_old = i, j_old = j;
-		switch (action)
-		{
-		case 0:
-			j++;//up
-			break;
-		case 1:
-			j--;//down
-			break;
-		case 2:
-			i--;//left
-			break;
-		case 3:
-			i++;//right
-			break;
-		}
-		if (world.isInside(i, j) == true)//move robot if avaiable
-		{
-			//move agent // state를 업뎃 해주고 
-			my_agent.move(i, j);
-			
-			//update reward(r_t) rt계산 바꾸고
-			my_agent.reward_ -= 0.01;
-
-			//update q values of previous cell(q_t) qt계산해서 바꾸고
-			world.getCell(i_old, j_old).q_[action] = world.getCell(i, j).reward_ + world.getCell(i, j).getMaxQ()+my_agent.reward_;
-
-			//reset if agent is in final cells 만약  파이널에 도달했으면 리셋후 훈련시작
-			if ((i == 2 && j == 1) || (i == 2 && j == 0))
-			{
-				my_agent.reset();
-			}
-		}
-		else //만약 벗어난다면?
-		{
-			world.getCell(i_old, j_old).q_[action] = -0.1;
-			// you may give negative reward (penalty) to agent.
-		}
-		//std::cout << "Agent status " << my_agent.i_ << " " << my_agent.j_ <<std::endl;
-		//std::cout << "action " << action << std::endl;
-
-	}
-	world.print();
-
-
-}
 
 
 void grid_world2()
@@ -181,13 +116,13 @@ void grid_world2()
 
 	srand((unsigned int)time(NULL));
 	std::cout << "Hello, grid world2!" << std::endl;
-	const int world_res_i = 6, world_res_j = 4;
+	const int world_res_i = 4, world_res_j = 3;
 	GridWorld world(world_res_i, world_res_j);
-	double alpha = 0.5;
+	double alpha = 0.8;
 	double gamma = 0.9;
 
-	point pos_reward[1] = { 5, 3 };
-	point nav_reward[4] = { 5, 0,1, 1, 2, 1 ,3, 1 };
+	point pos_reward[1] = { 3, 2 };
+	point nav_reward[1] = { 3, 1 };
 
 
 	for (int j = 0; j < world_res_j; j++)
@@ -204,6 +139,8 @@ void grid_world2()
 	{
 		world.getCell(itr.x, itr.y).reward_ = -1.0;
 	}
+
+	world.getCell(1, 1).is_wall = true;
 	
 	Agent my_agent;
 
@@ -242,7 +179,6 @@ void grid_world2()
 					world.getCell(i, j).reward_
 					+ gamma*world.getCell(i, j).getMaxQ() + my_agent.reward_
 					- world.getCell(i_old, j_old).q_[action]
-					+ my_agent.reward_
 					);
 
 			//reset if agent is in final cells 만약  파이널에 도달했으면 리셋후 훈련시작
@@ -260,9 +196,10 @@ void grid_world2()
 		}
 		else //만약 벗어난다면?
 		{
-			world.getCell(i_old, j_old).q_[action] = -0.1;
+			world.getCell(i_old, j_old).q_[action] = -0.01;
 		}
-		
+		system("cls");
+		world.print();
 
 	}
 	world.print();

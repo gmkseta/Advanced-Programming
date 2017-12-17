@@ -21,36 +21,31 @@ void LRU(int n, string arr[]) //n은 캐시 사이즈
 	deque<string> strarr; //캐시
 
 
-	for (int i = 0;arr[i].size()<=20; i++)
+	for (int i = 0; arr[i].size()<=20&&arr[i].size()>0 ; i++)
 	{
 		for (int k = 0; k<arr[i].size(); k++)
 			arr[i][k] = toupper(arr[i][k]);	
 
 		int m = find_v(arr[i], strarr);
-		
-		
-		if (strarr.size()<n && find_v(arr[i], strarr)<0)
+		if (strarr.size()<n &&m<0)
 		{
 			count += 5;
 			strarr.push_back(arr[i]);
 		}
-		else if (m > 0)
+		else if (m >= 0)
 		{
-			
-			strarr.push_back(strarr[m]);
-			strarr.erase(strarr.begin() + m - 1);
-			
-
+			string temp = strarr[m];
+			strarr.erase(strarr.begin() + m);
+			strarr.push_back(temp);
 			count++;
-		} //캐시 hit면 시간1더해주고 LRU를 위한 우선순위 변경
-		else if (m<0)
+		} 
+		else
 		{
-
 			count += 5;
 			if (strarr.size() != 0)
 				strarr.pop_front();
 			strarr.push_back(arr[i]);
-		} //캐시 fault일때 LRU인 데이터 캐시에서 빼고 새로운 데이터를 삽입해줌.
+		} 
 	}
 
 	cout << count << endl;
@@ -64,6 +59,7 @@ int main()
 	string arr3[15] = { "Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "Seoul", "Rome", "Paris", "Jeju", "NewYork", "Rome" };
 	string arr4[15] = { "Jeju", "Pangyo", "NewYork", "newyork" };
 	string arr5[15] = { "Jeju", "Pangyo", "Seoul", "NewYork", "LA" };
+	
 	LRU(3, arr1);
 	LRU(3, arr2);
 	LRU(2, arr3);

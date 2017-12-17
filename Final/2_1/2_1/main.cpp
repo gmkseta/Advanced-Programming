@@ -191,8 +191,8 @@ void lo()
 			const float error = y - lo.getY(x);
 			const float sqr_error = 0.5*error*error;
 
-			const float de_da = -error*x*lo.getY(x)*(1 - lo.getY(x));
-			const float de_db = -error*1.0f*lo.getY(x)*(1 - lo.getY(x));
+			const float de_da = error*x*lo.getY(x)*(1 - lo.getY(x));
+			const float de_db = error*1.0f*lo.getY(x)*(1 - lo.getY(x));
 
 			de_da_sum += de_da;
 			de_db_sum += de_db;
@@ -200,8 +200,8 @@ void lo()
 			sqr_error_sum += sqr_error;
 		}
 
-		lo.a -= learning_rate*de_da_sum;
-		lo.b -= learning_rate*de_db_sum;
+		lo.a += learning_rate*de_da_sum;
+		lo.b += learning_rate*de_db_sum;
 
 		if (n % 10000 == 0)
 			std::cout << sqr_error_sum << " ";
